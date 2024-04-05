@@ -5,6 +5,7 @@ import {
 import { UserPage, UserEditPage, UserRolesEditPage, GroupPage, GroupEditPage, GroupRolesEditPage } from "./Pages";
 import { SearchPage } from "./Pages/SearchPage";
 import { EventPage } from "./Pages/EventPage";
+import { EventEditPage } from "./Pages/EventEditPage";
 
 // import { UserPage, GroupPage } from "./Pages";
 
@@ -22,6 +23,11 @@ export const Routes = [
     {
         path: "/event/view/:id",
         element: <EventPage />,
+        errorElement: <SearchPage />,
+    },
+    {
+        path: "/event/edit/:id",
+        element: <EventEditPage />,
         errorElement: <SearchPage />,
     },
     {
@@ -63,5 +69,4 @@ export const Routes = [
 
 const router = createBrowserRouter(Routes, {basename: "/ug"});
 // const router = createBrowserRouter(Routes);
-
 export const AppRouter = () => <RouterProvider router={router} />
