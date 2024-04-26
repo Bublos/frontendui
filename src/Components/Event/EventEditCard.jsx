@@ -5,7 +5,11 @@ import Col from 'react-bootstrap/Col'
 import { UpdateEventAsyncAction } from '../../Queries/UpdateEventAsyncAction'
 import { EventEditType } from './EventEditType'
 
-    
+// const changedAsyncActioj = (item)=> {
+//     const changedItem = {...item, value: Number(item.value)}
+//     return UpdateEventAsyncAction(changedItem)
+// }
+
 export const EventEditCard = ({event}) => {
     return (
         <CardCapsule  title={"Událost - atributy: " + event?.name}>
