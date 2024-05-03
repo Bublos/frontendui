@@ -25,7 +25,7 @@ export const EventEditType = ({event}) => {
     return (
         <div>
             <EditableAttributeSelect item={eventEx} attributeName ="eventType_id" label="Typ" asyncUpdater={UpdateEventAsyncAction}>
-                {eventtypesdata.map(et => <option key= {et.id} value={et.id}>{et.name}</option>)}
+                {eventtypesdata.map(event => <option key= {event.id} value={event.id}>{event.name}</option>)}
                 {/*<option value = "a517c2fd-8dc7-4a2e-a107-cbdb88ba2aa5">Školní rok</option>
                 <option value = "69ec2b0b-a39d-40df-9cea-e295b36749c9">Semestr</option>*/}
             </EditableAttributeSelect>
