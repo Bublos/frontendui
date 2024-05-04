@@ -14,3 +14,5 @@ Based on React, developed with vite stack.
 10.4 EditableAttribute
 
 14.4 dynamický Editable attribute 
+
+4.5 EventLink
