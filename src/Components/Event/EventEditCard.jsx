@@ -4,6 +4,7 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import { UpdateEventAsyncAction } from '../../Queries/UpdateEventAsyncAction'
 import { EventEditType } from './EventEditType'
+import { EventLink } from './EventLink'
 
 // const changedAsyncActioj = (item)=> {
 //     const changedItem = {...item, value: Number(item.value)}
@@ -11,8 +12,12 @@ import { EventEditType } from './EventEditType'
 // }
 
 export const EventEditCard = ({event}) => {
+
+    /* const onCancel = () => {}
+    const onOk = () => {}
+    const [visible, setVisible] = useState(true) */
     return (
-        <CardCapsule  title={"Událost - atributy: " + event?.name}>
+        <CardCapsule  title={<>Událost <EventLink event={event } /></>}>
             <Row>
                 <Col>
                     <EditableAttributeText item={event} attributeName ="name" label="Název" asyncUpdater={UpdateEventAsyncAction}/>

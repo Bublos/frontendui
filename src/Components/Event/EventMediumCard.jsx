@@ -2,10 +2,11 @@
 import { CardCapsule } from '@hrbolek/uoisfrontend-shared/src'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
+import { EventLink } from './EventLink'
 
 export const EventMediumCard = ({event}) => {
     return (
-        <CardCapsule  title={"Událost - atributy: " + event?.name}>
+        <CardCapsule  title={<>Událost <EventLink event={event } /></>}>
             
             <Row>
                 <Col>Název</Col>

@@ -9,8 +9,8 @@ const validator = CreateAsyncQueryValidator({error: "Nepovedlo se načíst uživ
 export const EventPage = ()  => {
     const {id} = useParams()
     const [onResolve, onReject] = validator(useDispatch())
-    const [event, userPromise] = useFreshItem({id}, FetchEventByIdAsyncAction )
-    userPromise.then(onResolve, onReject)
+    const [event, eventPromise] = useFreshItem({id}, FetchEventByIdAsyncAction )
+    eventPromise.then(onResolve, onReject)
 
     if (event) {
         return (
