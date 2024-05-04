@@ -8,7 +8,7 @@ export const EventLink_ = ({event, children}) => {
     )
 }
 
-const UserMenuItems = {
+const EventMenuItems = {
     "Editovat": "local:/event/edit",
     "Zobrazit": "local:/event/view",
 
@@ -18,7 +18,7 @@ export const EventLink = ({event, children, menu=true}) => {
     if (menu) {
         return (
             <Dropdown  className="d-inline mx-2" autoClose="outside" size="sm">
-                <EventLink_ user={user}>
+                <EventLink_ event={event}>
                     {children}
                 </EventLink_>
                 <Dropdown.Toggle split variant='secondary-outline' id="dropdown-basic" size="sm">

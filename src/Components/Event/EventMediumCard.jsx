@@ -7,7 +7,15 @@ import { EventLink } from './EventLink'
 export const EventMediumCard = ({event}) => {
     return (
         <CardCapsule  title={<>Událost <EventLink event={event } /></>}>
-            
+            {
+            event?.masterEvent?
+                <Row>
+                    <Col>Nadřízená událost</Col>
+                    <Col><EventLink event={event.masterEvent} /></Col>
+                </Row>
+                :""
+
+            }
             <Row>
                 <Col>Název</Col>
                 <Col>{event?.name}</Col>
