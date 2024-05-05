@@ -5,11 +5,18 @@ const query = `query ($id: UUID!) {
         
           __typename
           id
-          lastchange
           name
+
           startdate
           enddate
           eventType {
+            id
+            name
+          }
+          created
+          lastchange
+
+          masterEvent {
             id
             name
           }

@@ -28,7 +28,7 @@ export const EventLink = ({event, children, menu=true}) => {
                 <Dropdown.Menu>
                     <Dropdown.Item ><Link to={"/event/view/" + event?.id} >Zobrazit</Link></Dropdown.Item>
                     <Dropdown.Item ><Link to={"/event/edit/" + event?.id} >Editovat</Link></Dropdown.Item>
-                    {/* <Dropdown.Item ><Link to={"/eventpresences/view/" + event?.id} >Účast</Link></Dropdown.Item> */}
+                    <Dropdown.Item ><Link to={"/eventpresences/view/" + event?.id} >Účast</Link></Dropdown.Item>
                 </Dropdown.Menu>
             </Dropdown>                
             
