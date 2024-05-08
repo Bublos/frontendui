@@ -22,7 +22,7 @@ export const SubEventsPage = ()  => {
             //    {JSON.stringify(event)}
             //</div>
             <EventLargeCard event={event}>
-                <EventsSVG events = {event} />
+                <EventsSVG events = {event.subEvents} />
             </EventLargeCard>
         )
     } else {
