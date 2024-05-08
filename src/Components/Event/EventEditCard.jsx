@@ -23,11 +23,11 @@ export const EventEditCard = ({event}) => {
                     <EditableAttributeText item={event} attributeName ="name" label="Název" asyncUpdater={UpdateEventAsyncAction}/>
                 </Col>
             </Row>
-            {/* <Row>
+            <Row>
                 <Col>
                     <EventEditType event = {event}/>
                 </Col>
-            </Row> */}
+            </Row>
         </CardCapsule>
     )
 }

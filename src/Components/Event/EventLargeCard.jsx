@@ -20,7 +20,7 @@ export const EventLargeCard = ({event, children}) => {
                 {children}
             </Col>
             <Col md={3}>
-                <EventMediumCard event={event}/>
+                {/* <EventMediumCard event={event}/> */}
                 {/*<UserRolesCard user={user}/>*/}
             </Col>
             

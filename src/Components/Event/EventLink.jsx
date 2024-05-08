@@ -31,6 +31,7 @@ export const EventLink = ({event, children, menu=true}) => {
                     <Dropdown.Item as={"div"}><ProxyLink to={base + "/event/view/" + event?.id} >Zobrazit</ProxyLink></Dropdown.Item>
                     <Dropdown.Item as={"div"}><ProxyLink to={base + "/event/edit/" + event?.id} >Editovat</ProxyLink></Dropdown.Item>
                     <Dropdown.Item as={"div"}><ProxyLink to={base + "/eventpresences/view/" + event?.id} >Účast</ProxyLink></Dropdown.Item>
+                    <Dropdown.Item as={"div"}><ProxyLink to={base + "/events/edit/" + event?.id} >SubEvents</ProxyLink></Dropdown.Item>
                 </Dropdown.Menu>
             </Dropdown>                
             

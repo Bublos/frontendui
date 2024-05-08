@@ -2,10 +2,10 @@
 import { useParams } from "react-router-dom"
 //import { UserLargeCard } from "../Components"
 import { useFreshItem, CreateAsyncQueryValidator, useDispatch } from "@hrbolek/uoisfrontend-shared/src"
-import { FetchEventByIdAsyncAction } from "../Queries/FetchEventByIdAsyncAction"
 import { EventLargeCard } from "../Components/Event/EventLargeCard"
 import { EventsSVG } from "../Components/Event/EventsSVG"
 import { FetchSubEventsByIdAsyncAction } from "../Queries/FetchSubEventsByIdAsyncAction"
+import { SubEventsCard } from "../Components/Event/SubEventCard"
 
 const validator = CreateAsyncQueryValidator({error: "Nepovedlo se načíst uživatele", success: "Načtení uživatele se povedlo"})
 export const SubEventsPage = ()  => {
@@ -22,8 +22,17 @@ export const SubEventsPage = ()  => {
             //    {JSON.stringify(event)}
             //</div>
             <EventLargeCard event={event}>
-                <EventsSVG events = {event.subEvents} />
+                {event.subEvents && event.subEvents.length > 0 ? (
+                <>
+                    <EventsSVG events={event.subEvents} />
+                    <SubEventsCard event={event} />
+                </>
+                ) : (
+                <p>Tento Event nemá žádné subEvents.</p>
+                )}
             </EventLargeCard>
+
+
         )
     } else {
         return (

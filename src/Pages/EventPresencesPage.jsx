@@ -16,7 +16,11 @@ export const EventPresencesPage = ()  => {
     if (event) {
         return (
             <EventLargeCard event={event} >
+                {event.presences && event.presences.length > 0 ? (
                 <EventPresencesCard event={event} />
+                ) : (
+                <p>Tato událost nemá žádné přítomnosti.</p>
+                )}
             </EventLargeCard>
         )
     } else {
