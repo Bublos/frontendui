@@ -1,10 +1,12 @@
 /* eslint-disable react/prop-types */
 import { Dropdown } from "react-bootstrap";
-import { Link } from "react-router-dom";
+//import { Link } from "react-router-dom";
+import { ProxyLink } from "@hrbolek/uoisfrontend-shared/src"
+import { base } from "../../config"
 
 export const EventLink_ = ({event, children}) => {
     return (
-        <Link to={"/event/view/" + event?.id}>{children?children:event?.name}</Link>
+        <ProxyLink to={base + "/event/view/" + event?.id}>{children?children:event?.name}</ProxyLink>
     )
 }
 
@@ -26,9 +28,9 @@ export const EventLink = ({event, children, menu=true}) => {
                 </Dropdown.Toggle>
 
                 <Dropdown.Menu>
-                    <Dropdown.Item ><Link to={"/event/view/" + event?.id} >Zobrazit</Link></Dropdown.Item>
-                    <Dropdown.Item ><Link to={"/event/edit/" + event?.id} >Editovat</Link></Dropdown.Item>
-                    <Dropdown.Item ><Link to={"/eventpresences/view/" + event?.id} >Účast</Link></Dropdown.Item>
+                    <Dropdown.Item as={"div"}><ProxyLink to={base + "/event/view/" + event?.id} >Zobrazit</ProxyLink></Dropdown.Item>
+                    <Dropdown.Item as={"div"}><ProxyLink to={base + "/event/edit/" + event?.id} >Editovat</ProxyLink></Dropdown.Item>
+                    <Dropdown.Item as={"div"}><ProxyLink to={base + "/eventpresences/view/" + event?.id} >Účast</ProxyLink></Dropdown.Item>
                 </Dropdown.Menu>
             </Dropdown>                
             

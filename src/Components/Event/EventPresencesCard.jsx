@@ -3,11 +3,12 @@ import { CardCapsule } from '@hrbolek/uoisfrontend-shared/src'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import { EventLink } from './EventLink'
+import { UserLink } from '../User/UserLink'
 
 const PresenceRow = ({presence}) => {
     return (
         <tr>
-            <td>{presence?.user?.email}</td>
+            <td><UserLink user={presence?.user} /></td>
             <td>{presence?.invitationType?.name}</td>
             <td>{presence?.presenceType?.name}</td>
         </tr>

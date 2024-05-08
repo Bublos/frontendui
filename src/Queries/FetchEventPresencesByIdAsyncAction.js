@@ -24,7 +24,7 @@ const query = `query ($id: UUID!) {
           id
           presenceType { id name }
           invitationType { id name }
-          user { id name surname email }
+          user { id name surname fullname email }
           
         }
         

@@ -7,72 +7,73 @@ import { SearchPage } from "./Pages/SearchPage";
 import { EventPage } from "./Pages/EventPage";
 import { EventEditPage } from "./Pages/EventEditPage";
 import { EventPresencesPage } from "./Pages/EventPresencesPage";
+import { base } from "./config";
 
 // import { UserPage, GroupPage } from "./Pages";
 
 export const Routes = [
     {
-        path: "/",
+        path: base + "/",
         errorElement: <SearchPage />,
         element: <SearchPage />
     },
     {
-        path: "/user/view/:id",
+        path: base +"/user/view/:id",
         element: <UserPage />,
         errorElement: <SearchPage />,
     },
     {
-        path: "/event/view/:id",
+        path: base +"/event/view/:id",
         element: <EventPage />,
         errorElement: <SearchPage />,
     },
     {
-        path: "/eventpresences/view/:id",
+        path: base +"/eventpresences/view/:id",
         element: <EventPresencesPage />,
         errorElement: <SearchPage />,
     },
     {
-        path: "/event/edit/:id",
+        path: base +"/event/edit/:id",
         element: <EventEditPage />,
         errorElement: <SearchPage />,
     },
     {
-        path: "/user/edit/:id",
+        path:base + "/user/edit/:id",
         element: <UserEditPage />,
         errorElement: <SearchPage />,
     },
     {
-        path: "/userroles/edit/:id",
+        path: base +"/userroles/edit/:id",
         element: <UserRolesEditPage />,
         errorElement: <SearchPage />,
     },
     {
-        path: "/group/view/:id",
+        path: base +"/group/view/:id",
         element: <GroupPage />,
         errorElement: <SearchPage />,
     },
     {
-        path: "/group/edit/:id",
+        path: base +"/group/edit/:id",
         element: <GroupEditPage />,
         errorElement: <SearchPage />,
     },
     {
-        path: "/grouproles/edit/:id",
+        path: base +"/grouproles/edit/:id",
         element: <GroupRolesEditPage />,
         errorElement: <SearchPage />,
     },
     {
-        path: "/search",
+        path: base +"/search",
         element: <SearchPage />,
         errorElement: <SearchPage />,
     },
     {
-      path: "/search/:phrase",
+      path: base +"/search/:phrase",
       element: <SearchPage />,
       errorElement: <SearchPage />,
     },    
 ]
 
-const router = createBrowserRouter(Routes, {basename: "/events"});
-// const router = createBrowserRouter(Routes);
+//const router = createBrowserRouter(Routes, {basename: "/events"});
+const router = createBrowserRouter(Routes);
 export const AppRouter = () => <RouterProvider router={router} />
