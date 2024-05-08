@@ -31,6 +31,7 @@ export const EventMediumCard = ({event}) => {
                 <Col>Konec</Col>
                 <Col>{endstring}</Col>
             </Row>
+            
         </CardCapsule>
     )
 }
