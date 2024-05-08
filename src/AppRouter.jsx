@@ -18,22 +18,22 @@ export const Routes = [
         element: <SearchPage />
     },
     {
-        path: base +"/user/view/:id",
+        path: base + "/user/view/:id",
         element: <UserPage />,
         errorElement: <SearchPage />,
     },
     {
-        path: base +"/event/view/:id",
+        path: base + "/event/view/:id",
         element: <EventPage />,
         errorElement: <SearchPage />,
     },
     {
-        path: base +"/eventpresences/view/:id",
+        path: base + "/eventpresences/view/:id",
         element: <EventPresencesPage />,
         errorElement: <SearchPage />,
     },
     {
-        path: base +"/event/edit/:id",
+        path: base + "/event/edit/:id",
         element: <EventEditPage />,
         errorElement: <SearchPage />,
     },
@@ -43,32 +43,32 @@ export const Routes = [
         errorElement: <SearchPage />,
     },
     {
-        path: base +"/userroles/edit/:id",
+        path: base + "/userroles/edit/:id",
         element: <UserRolesEditPage />,
         errorElement: <SearchPage />,
     },
     {
-        path: base +"/group/view/:id",
+        path: base + "/group/view/:id",
         element: <GroupPage />,
         errorElement: <SearchPage />,
     },
     {
-        path: base +"/group/edit/:id",
+        path: base + "/group/edit/:id",
         element: <GroupEditPage />,
         errorElement: <SearchPage />,
     },
     {
-        path: base +"/grouproles/edit/:id",
+        path: base + "/grouproles/edit/:id",
         element: <GroupRolesEditPage />,
         errorElement: <SearchPage />,
     },
     {
-        path: base +"/search",
+        path: base + "/search",
         element: <SearchPage />,
         errorElement: <SearchPage />,
     },
     {
-      path: base +"/search/:phrase",
+      path: base + "/search/:phrase",
       element: <SearchPage />,
       errorElement: <SearchPage />,
     },    
