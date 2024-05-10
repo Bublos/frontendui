@@ -24,6 +24,10 @@ export const EventMediumCard = ({event}) => {
                 <Col>{event?.name}</Col>
             </Row>
             <Row>
+                <Col>Typ</Col>
+                <Col>{event?.eventType?.name}</Col>
+            </Row>
+            <Row>
                 <Col>Počátek</Col>
                 <Col>{startstring}</Col>
             </Row>
@@ -31,6 +35,7 @@ export const EventMediumCard = ({event}) => {
                 <Col>Konec</Col>
                 <Col>{endstring}</Col>
             </Row>
+            
             
         </CardCapsule>
     )

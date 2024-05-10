@@ -18,4 +18,10 @@ Based on React, developed with vite stack.
 
 14.4 dynamický Editable attribute 
 
-4.5 Nefunkční EventLink
+4.5 Zprovoznění EventLink
+
+5.5 Zprovoznění Presence card
+
+8.5 Pokus o zprovoznění stránky SubEvents
+
+10.5 Edit data

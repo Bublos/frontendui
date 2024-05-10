@@ -28,6 +28,16 @@ export const EventEditCard = ({event}) => {
                     <EventEditType event = {event}/>
                 </Col>
             </Row>
+            <Row>
+                <Col>
+                    <EditableAttributeText item={event} attributeName="startdate" label="Počátek" asyncUpdater={UpdateEventAsyncAction} type="datetime-local" />
+                </Col>
+            </Row>
+            <Row>
+                <Col>
+                    <EditableAttributeText item={event} attributeName="enddate" label="Konec" asyncUpdater={UpdateEventAsyncAction} type="datetime-local" />
+                </Col>
+            </Row>
         </CardCapsule>
     )
 }

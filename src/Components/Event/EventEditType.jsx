@@ -29,7 +29,7 @@ export const EventEditType = ({event}) => {
                 {/*<option value = "a517c2fd-8dc7-4a2e-a107-cbdb88ba2aa5">Školní rok</option>
                 <option value = "69ec2b0b-a39d-40df-9cea-e295b36749c9">Semestr</option>*/}
             </EditableAttributeSelect>
-            {JSON.stringify(eventtypesdata)}
+            {/* {JSON.stringify(eventtypesdata)} */}
         </div>
     );
 };
