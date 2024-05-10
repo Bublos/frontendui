@@ -8,6 +8,8 @@ import { start } from '@popperjs/core'
 export const EventMediumCard = ({event}) => {
     const startstring = new Date(event?.startdate).toDateString()
     const endstring = new Date(event?.enddate).toDateString()
+    const laststring = new Date(event?.lastchange).toDateString()
+    const createstring = new Date(event?.created).toDateString()
     return (
         <CardCapsule  title={<>Událost <EventLink event={event } /></>}>
             {
@@ -27,6 +29,7 @@ export const EventMediumCard = ({event}) => {
                 <Col>Typ</Col>
                 <Col>{event?.eventType?.name}</Col>
             </Row>
+            <br></br>
             <Row>
                 <Col>Počátek</Col>
                 <Col>{startstring}</Col>
@@ -34,6 +37,15 @@ export const EventMediumCard = ({event}) => {
             <Row>
                 <Col>Konec</Col>
                 <Col>{endstring}</Col>
+            </Row>
+            <br></br>
+            <Row>
+                <Col>Vytvořen</Col>
+                <Col>{createstring}</Col>
+            </Row>
+            <Row>
+                <Col>Poslední změna</Col>
+                <Col>{laststring}</Col>
             </Row>
             
             
