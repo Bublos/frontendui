@@ -25,3 +25,5 @@ Based on React, developed with vite stack.
 8.5 Pokus o zprovoznění stránky SubEvents
 
 10.5 Edit data
+
+14.5 Dodělaní SubEvents link na name

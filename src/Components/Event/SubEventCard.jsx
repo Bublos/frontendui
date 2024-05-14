@@ -9,8 +9,8 @@ const SubEventRow = ({subEvent}) => {
     const endstring = new Date(subEvent?.enddate).toDateString()
     return (
         <tr>
-            <td>{subEvent?.id}</td>
-            <td>{subEvent?.name}</td>
+            {/* <td>{subEvent?.id}</td> */}
+            <td><EventLink event={subEvent}>{subEvent?.name}</EventLink></td>
             <td>{startstring}</td>
             <td>{endstring}</td>
         </tr>
@@ -24,7 +24,7 @@ export const SubEventsCard = ({event}) => {
             <table className='table table-striped table-bordered table-sm'>
                 <thead>
                     <tr>
-                        <th>ID</th>
+                        {/* <th>ID</th> */}
                         <th>Název</th>
                         <th>Začátek</th>
                         <th>Konec</th>
