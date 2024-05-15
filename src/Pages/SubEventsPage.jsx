@@ -6,6 +6,7 @@ import { EventLargeCard } from "../Components/Event/EventLargeCard"
 import { EventsSVG } from "../Components/Event/EventsSVG"
 import { FetchSubEventsByIdAsyncAction } from "../Queries/FetchSubEventsByIdAsyncAction"
 import { SubEventsCard } from "../Components/Event/SubEventCard"
+import { RandomEvents } from "../Components/Event/RandomEvents"
 
 const validator = CreateAsyncQueryValidator({error: "Nepovedlo se načíst uživatele", success: "Načtení uživatele se povedlo"})
 export const SubEventsPage = ()  => {
@@ -26,10 +27,12 @@ export const SubEventsPage = ()  => {
                 <>
                     <EventsSVG events={event.subEvents} />
                     <SubEventsCard event={event} />
+                    
                 </>
                 ) : (
                 <p>Tento Event nemá žádné subEvents.</p>
                 )}
+                {/* <RandomEvents masterevent_id={event.id} /> */}
             </EventLargeCard>
 
 
