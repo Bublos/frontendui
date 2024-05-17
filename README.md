@@ -27,3 +27,5 @@ Based on React, developed with vite stack.
 10.5 Edit data
 
 14.5 Dodělaní SubEvents link na name
+
+15.5 Přidání SubEvents pomocí buttonu c:

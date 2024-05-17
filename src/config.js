@@ -1,1 +1,1 @@
-export const base = "/debug"
+export const base = "/events"
