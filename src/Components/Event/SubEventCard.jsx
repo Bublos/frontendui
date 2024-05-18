@@ -3,13 +3,16 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import { EventLink } from './EventLink'
 import { UserLink } from '../User/UserLink'
+import { getWeekNumber } from './EventsSVG'
 
 const SubEventRow = ({subEvent}) => {
     const startstring = new Date(subEvent?.startdate).toDateString()
     const endstring = new Date(subEvent?.enddate).toDateString()
+    const weekNumber = getWeekNumber(subEvent.startdate);
     return (
         <tr>
             {/* <td>{subEvent?.id}</td> */}
+            <td>{weekNumber}</td>
             <td><EventLink event={subEvent}>{subEvent?.name}</EventLink></td>
             <td>{startstring}</td>
             <td>{endstring}</td>
@@ -25,6 +28,7 @@ export const SubEventsCard = ({event}) => {
                 <thead>
                     <tr>
                         {/* <th>ID</th> */}
+                        <th>Týden</th>
                         <th>Název</th>
                         <th>Začátek</th>
                         <th>Konec</th>
