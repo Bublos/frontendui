@@ -16,8 +16,8 @@ const EventRectangle = ({X, Y, L1, L2, L3, L4, width=defaultwidth, height=defaul
             <text x={X} y={Y} fontSize="2em" fontFamily="serif">
                 <tspan dy={28} x={X+10}>{L1}</tspan>
                 <tspan dy={40} x={X+10}>{L2}</tspan>
-                <tspan dy={40} x={X+10}>{L3}</tspan>
-                <tspan dy={40} x={X+10}>{L4}</tspan>
+                <tspan dy={80} x={X+10}>{L3}</tspan>
+                <tspan dy={120} x={X+10}>{L4}</tspan>
             </text>
         </>
     )
@@ -86,45 +86,47 @@ function getYHour(startHour, startMinutes) {
 }
 
 
+
+
+
 const Event = ({referenceMonday, event}) => {
     const diffTime = Math.abs(new Date(event.startdate) - referenceMonday);
     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
     const weekNumber = getWeekNumber(event.startdate);
-    const X_week = (weekNumber * defaultwidth) - defaultwidth;
     const date = new Date(event.startdate);
     const dayOfWeek = (date.getDay() + 6) % 7; // 0 = Monday, 1 = Tuesday, ..., 4 = Friday
+    
+    //Zobrazení pouze eventů ve dnech po-pá
+    let X_week = 0;
+    if (dayOfWeek >= 0 && dayOfWeek <= 4) {
+        X_week = (weekNumber * defaultwidth) - defaultwidth;
+    }
+    
+    
     const Y_week = dayOfWeek * defaultheight * 4;
     const startHour = date.getHours(); // returns the hour (0-23)
     const startMinutes = date.getMinutes(); // returns the minutes (0-59)
     const Y_hour = getYHour(startHour, startMinutes);
+    const time = `${startHour}:${startMinutes < 10 ? '0' : ''}${startMinutes}`;
     return (
         <g>
-            <clipPath id="myClip">
+           {/*  <clipPath id="myClip">
                 <rect width={defaultwidth} height={defaultheight * 4 * 4} x={X_week} y={Y_week + Y_hour}  />
             </clipPath>
             <g clipPath="url(#myClip)">
-                <EventRectangle X={X_week} Y={Y_week + Y_hour} L2={event?.name} /> 
+                
+            </g> */}
+            <g>
+            <EventRectangle X={X_week} Y={Y_week + Y_hour} L2={event?.name} /> 
+            <EventRectangle X={X_week} Y={Y_week + Y_hour} L4={time} /> 
             </g>
         </g>
 
     )
 }
 
-/* export const EventsSVG = ({events}) => {
-    const now = new Date()
-    const prevMonday = new Date(now.getFullYear(), now.getMonth(), (now.getDate()-now.getDay() + 1))
-    return (
-        <svg viewBox={"-200 -150 2000 3200"} width="100vmin" height="100vmin" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="50" cy="50" r="40" stroke="green" strokeWidth="4" fill="yellow" />
-            <EventWeekHeader />
-            {events.map(e => <Event key={e.id} referenceMonday={prevMonday} event={e}/>)}
-        </svg>
-    )
-} */
-
 export const EventsSVG = ({events}) => {
     const [scroll, setScroll] = useState(0);
-    const [scrollY, setScrollY] = useState(0); // add this line
     const now = new Date()
     const prevMonday = new Date(now.getFullYear(), now.getMonth(), (now.getDate()-now.getDay() + 1))
 
@@ -132,13 +134,21 @@ export const EventsSVG = ({events}) => {
         setScroll(parseInt(event.target.value, 10));
     };
 
+    const handleWheel = (event) => {
+        const delta = Math.sign(event.deltaX);
+        setScroll(prevScroll => Math.max(0, prevScroll + delta));
+    };
+
+
     return (
         <div>
             <input type="range" min="0" max={weeks.length - 16} value={scroll} onChange={handleScroll} />
-            <svg viewBox={"-200 -150 2000 3200"} width="100vmin" height="100vmin" xmlns="http://www.w3.org/2000/svg">
+            <svg viewBox={"-200 -150 2000 3200"} width="100vmin" height="100vmin" xmlns="http://www.w3.org/2000/svg" onWheel={handleWheel}>
                 <g transform={`translate(${-scroll * defaultwidth}, 0)`}>
                     <EventWeekHeader />
-                    {events.map(e => <Event key={e.id} referenceMonday={prevMonday} event={e}/>)}
+                    {events.map((e) => (
+                        <Event key={e.id} referenceMonday={prevMonday} event={e} />
+                    ))}
                 </g>
             </svg>
         </div>

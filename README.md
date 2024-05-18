@@ -31,3 +31,4 @@ Based on React, developed with vite stack.
 15.5 Přidání SubEvents pomocí buttonu c:
 
 18.5 Vizualizace rozvrhu, zobrazení Eventu na správném místě
+     Jde scrollovat, eventy se zobrazují správně krom víkendových.
