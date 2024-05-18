@@ -29,3 +29,5 @@ Based on React, developed with vite stack.
 14.5 Dodělaní SubEvents link na name
 
 15.5 Přidání SubEvents pomocí buttonu c:
+
+18.5 Vizualizace rozvrhu, zobrazení Eventu na správném místě

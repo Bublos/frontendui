@@ -67,25 +67,43 @@ const EventWeekHeader = () => {
 
 export function getWeekNumber(dateString) {
     const date = new Date(dateString);
-    date.setHours(0, 0, 0, 0);
+    /* date.setHours(0, 0, 0, 0); */
     date.setDate(date.getDate() + 3 - (date.getDay() + 6) % 7);
     const week1 = new Date(date.getFullYear(), 0, 4);
     return 1 + Math.round(((date.getTime() - week1.getTime()) / 86400000 - 3 + (week1.getDay() + 6) % 7) / 7);
 }
 
+function getYHour(startHour, startMinutes) {
+    if (startHour < 9 || (startHour === 9 && startMinutes < 50)) {
+        return 0;
+    } else if (startHour < 11 || (startHour === 11 && startMinutes < 20)) {
+        return 1 * defaultheight;
+    } else if (startHour < 14 || (startHour === 14 && startMinutes < 30)) {
+        return 2 * defaultheight;
+    } else {
+        return 3 * defaultheight;
+    }
+}
+
+
 const Event = ({referenceMonday, event}) => {
     const diffTime = Math.abs(new Date(event.startdate) - referenceMonday);
     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
     const weekNumber = getWeekNumber(event.startdate);
-    const X_week = weekNumber * defaultwidth;
-    /* const X = weekNumber * defaultwidth; */
+    const X_week = (weekNumber * defaultwidth) - defaultwidth;
+    const date = new Date(event.startdate);
+    const dayOfWeek = (date.getDay() + 6) % 7; // 0 = Monday, 1 = Tuesday, ..., 4 = Friday
+    const Y_week = dayOfWeek * defaultheight * 4;
+    const startHour = date.getHours(); // returns the hour (0-23)
+    const startMinutes = date.getMinutes(); // returns the minutes (0-59)
+    const Y_hour = getYHour(startHour, startMinutes);
     return (
         <g>
             <clipPath id="myClip">
-                <rect width={defaultwidth} height={defaultheight * 4 * 4} x={0} y={0}  />
+                <rect width={defaultwidth} height={defaultheight * 4 * 4} x={X_week} y={Y_week + Y_hour}  />
             </clipPath>
             <g clipPath="url(#myClip)">
-                <EventRectangle X={75} Y={0} L2={event?.name} /> 
+                <EventRectangle X={X_week} Y={Y_week + Y_hour} L2={event?.name} /> 
             </g>
         </g>
 
@@ -106,6 +124,7 @@ const Event = ({referenceMonday, event}) => {
 
 export const EventsSVG = ({events}) => {
     const [scroll, setScroll] = useState(0);
+    const [scrollY, setScrollY] = useState(0); // add this line
     const now = new Date()
     const prevMonday = new Date(now.getFullYear(), now.getMonth(), (now.getDate()-now.getDay() + 1))
 
