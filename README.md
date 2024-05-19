@@ -34,3 +34,4 @@ Based on React, developed with vite stack.
      Jde scrollovat, eventy se zobrazují správně krom víkendových.
 
 19.5 Doplnění view o zobrazovaní času ve správném formátu,
+     Lze měnit barvu eventů
