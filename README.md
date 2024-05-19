@@ -32,3 +32,5 @@ Based on React, developed with vite stack.
 
 18.5 Vizualizace rozvrhu, zobrazení Eventu na správném místě
      Jde scrollovat, eventy se zobrazují správně krom víkendových.
+
+19.5 Doplnění view o zobrazovaní času ve správném formátu,

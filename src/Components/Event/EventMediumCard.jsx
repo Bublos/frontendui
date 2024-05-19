@@ -6,8 +6,12 @@ import { EventLink } from './EventLink'
 import { start } from '@popperjs/core'
 
 export const EventMediumCard = ({event}) => {
-    const startstring = new Date(event?.startdate).toDateString()
-    const endstring = new Date(event?.enddate).toDateString()
+    const startDate = new Date(event?.startdate);
+    const startstring = `${startDate.toDateString()} ${startDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
+
+    const endDate = new Date(event?.enddate);
+    const endstring = `${endDate.toDateString()} ${endDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
+    
     const laststring = new Date(event?.lastchange).toDateString()
     const createstring = new Date(event?.created).toDateString()
     return (

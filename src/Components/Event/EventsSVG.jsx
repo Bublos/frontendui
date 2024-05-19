@@ -48,9 +48,15 @@ const WeekHeader = ({week, X}) => {
     )
 }
 
+//Dny Po-Pá
 const days = [
     "Po", "Út", "St", "Čt", "Pá"
 ]
+
+//Dny Po-Ne (Pokud očekáváme eventy v jiných dnech než Po-Pá)
+/* const days = [
+    "Po", "Út", "St", "Čt", "Pá", "So", "Ne"
+] */
 /* const weeks = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16] */
 const weeks = Array.from({length: 52}, (_, i) => i + 1); // weeks from 1 to 52
 
@@ -75,13 +81,13 @@ export function getWeekNumber(dateString) {
 
 function getYHour(startHour, startMinutes) {
     if (startHour < 9 || (startHour === 9 && startMinutes < 50)) {
-        return 0;
+        return 0; //počátek v 8:00
     } else if (startHour < 11 || (startHour === 11 && startMinutes < 20)) {
-        return 1 * defaultheight;
+        return 1 * defaultheight; //počátek v 9:50
     } else if (startHour < 14 || (startHour === 14 && startMinutes < 30)) {
-        return 2 * defaultheight;
+        return 2 * defaultheight; //počátek v 11:40
     } else {
-        return 3 * defaultheight;
+        return 3 * defaultheight;// počátek v 14:30
     }
 }
 
@@ -101,6 +107,9 @@ const Event = ({referenceMonday, event}) => {
     if (dayOfWeek >= 0 && dayOfWeek <= 4) {
         X_week = (weekNumber * defaultwidth) - defaultwidth;
     }
+
+    //Zobrazení eventů ve dnech po-ne (Pokud očekáváme eventy v jiných dnech než Po-Pá)
+    //const X_week = (weekNumber * defaultwidth) - defaultwidth;
     
     
     const Y_week = dayOfWeek * defaultheight * 4;
@@ -127,6 +136,8 @@ const Event = ({referenceMonday, event}) => {
 
 export const EventsSVG = ({events}) => {
     const [scroll, setScroll] = useState(0);
+    const [scrollX, setScrollX] = useState(0);
+    const [scrollY, setScrollY] = useState(0);
     const now = new Date()
     const prevMonday = new Date(now.getFullYear(), now.getMonth(), (now.getDate()-now.getDay() + 1))
 
@@ -135,16 +146,25 @@ export const EventsSVG = ({events}) => {
     };
 
     const handleWheel = (event) => {
-        const delta = Math.sign(event.deltaX);
-        setScroll(prevScroll => Math.max(0, prevScroll + delta));
+        const deltaX = Math.sign(event.deltaX);
+        const deltaY = Math.sign(event.deltaY);
+    
+        if (Math.abs(event.deltaX) > Math.abs(event.deltaY)) {
+            // Handle horizontal scrolling
+            setScrollX(prevScrollX => Math.max(0, prevScrollX + deltaX));
+        } else {
+            // Handle vertical scrolling
+            setScrollY(prevScrollY => Math.max(0, prevScrollY + deltaY));
+        }
     };
 
 
     return (
         <div>
             <input type="range" min="0" max={weeks.length - 16} value={scroll} onChange={handleScroll} />
-            <svg viewBox={"-200 -150 2000 3200"} width="100vmin" height="100vmin" xmlns="http://www.w3.org/2000/svg" onWheel={handleWheel}>
+            <svg viewBox={"-200 -150 2000 3200"} width="100vmin" height="100vmin" xmlns="http://www.w3.org/2000/svg" > {/* Přidat pokud chceme scroll pomocí kolečka myši/touchpadu : onWheel={handleWheel} */}
                 <g transform={`translate(${-scroll * defaultwidth}, 0)`}>
+                {/* <g transform={`translate(${-scrollX * defaultwidth}, ${-scrollY * defaultwidth})`}> */}  {/* Přidat pokud chceme scroll pomocí kolečka myši/touchpadu */}
                     <EventWeekHeader />
                     {events.map((e) => (
                         <Event key={e.id} referenceMonday={prevMonday} event={e} />
