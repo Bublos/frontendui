@@ -23,16 +23,7 @@ export const SubEventsPage = ()  => {
             //    {JSON.stringify(event)}
             //</div>
             <EventLargeCard event={event}>
-                {event.subEvents && event.subEvents.length > 0 ? (
-                <>
-                    <EventsSVG events={event.subEvents} />
-                    <SubEventsCard event={event} />
-                    
-                </>
-                ) : (
-                <p>Tento Event nemá žádné subEvents.</p>
-                )}
-                {/* <RandomEvents masterevent_id={event.id} /> */}
+                <SubEventsCard event={event} />
             </EventLargeCard>
 
 

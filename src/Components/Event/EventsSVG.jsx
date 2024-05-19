@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { EventLink } from './EventLink';
 const heightUnit = 24
 const widthUnit = 25
 const defaultwidth_half = widthUnit << 1
@@ -16,8 +17,8 @@ const EventRectangle = ({X, Y, L1, L2, L3, L4, width=defaultwidth, height=defaul
             <text x={X} y={Y} fontSize="2em" fontFamily="serif">
                 <tspan dy={28} x={X+10}>{L1}</tspan>
                 <tspan dy={40} x={X+10}>{L2}</tspan>
-                <tspan dy={80} x={X+10}>{L3}</tspan>
-                <tspan dy={120} x={X+10}>{L4}</tspan>
+                <tspan dy={52} x={X+10}>{L3}</tspan>
+                <tspan dy={64} x={X+10}>{L4}</tspan>
             </text>
         </>
     )
@@ -126,8 +127,7 @@ const Event = ({referenceMonday, event, color="#7f7f7f7f"}) => {
                 
             </g> */}
             <g>
-            <EventRectangle X={X_week} Y={Y_week + Y_hour} L2={event?.name} color={color} /> 
-            <EventRectangle X={X_week} Y={Y_week + Y_hour} L4={time} color={color}/> 
+            <EventRectangle X={X_week} Y={Y_week + Y_hour} L2={event.name} L4={time} color={color}/> 
             </g>
         </g>
 
@@ -140,7 +140,7 @@ export const EventsSVG = ({events}) => {
     const [scrollY, setScrollY] = useState(0);
     const now = new Date()
     const prevMonday = new Date(now.getFullYear(), now.getMonth(), (now.getDate()-now.getDay() + 1))
-    const [color, setColor] = useState("#7f7f7f7f");
+    const [color, setColor] = useState(localStorage.getItem('color') || "#7f7f7f7f");
 
     const handleScroll = (event) => {
         setScroll(parseInt(event.target.value, 10));
@@ -161,6 +161,7 @@ export const EventsSVG = ({events}) => {
 
     const handleColorChange = (event) => {
         setColor(event.target.value);
+        localStorage.setItem('color', event.target.value);
     };
 
 
@@ -168,7 +169,7 @@ export const EventsSVG = ({events}) => {
         <div>
             <input type="color" value={color} onChange={handleColorChange} />
             <input type="range" min="0" max={weeks.length - 16} value={scroll} onChange={handleScroll} />
-            <svg viewBox={"-200 -150 2000 3200"} width="100vmin" height="100vmin" xmlns="http://www.w3.org/2000/svg" > {/* Přidat pokud chceme scroll pomocí kolečka myši/touchpadu : onWheel={handleWheel} */}
+            <svg viewBox={"400 -150 1400 3200"} width="90vmin" height="100vmin" xmlns="http://www.w3.org/2000/svg" > {/* Přidat pokud chceme scroll pomocí kolečka myši/touchpadu : onWheel={handleWheel} */}
                 <g transform={`translate(${-scroll * defaultwidth}, 0)`}>
                 {/* <g transform={`translate(${-scrollX * defaultwidth}, ${-scrollY * defaultwidth})`}> */}  {/* Přidat pokud chceme scroll pomocí kolečka myši/touchpadu */}
                     <EventWeekHeader />
