@@ -26,7 +26,7 @@ export const SubEventsCard = ({event}) => {
         <>
             <CardCapsule title={<>Událost <EventLink event={event } /></>}>
                 {event.subEvents && event.subEvents.length > 0 ? (
-                    <EventsSVG events={event.subEvents} />
+                    <EventsSVG events={event.subEvents} event={event} />
                 ) : (
                     <p>Tento Event nemá žádné subEvents.</p>
                 )}

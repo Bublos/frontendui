@@ -61,8 +61,8 @@ const days = [
 /* const days = [
     "Po", "Út", "St", "Čt", "Pá", "So", "Ne"
 ] */
-/* const weeks = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16] */
-const weeks = Array.from({length: 52}, (_, i) => i + 1); // weeks from 1 to 52
+const weeks = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]
+/* const weeks = Array.from({length: 52}, (_, i) => i + 1); */ // weeks from 1 to 52
 
 const EventWeekHeader = () => {
     return (
@@ -103,13 +103,14 @@ const Event = ({referenceMonday, event}) => {
     const diffTime = Math.abs(new Date(event.startdate) - referenceMonday);
     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
     const weekNumber = getWeekNumber(event.startdate);
+    const refWeekNumber = getWeekNumber(referenceMonday);
     const date = new Date(event.startdate);
     const dayOfWeek = (date.getDay() + 6) % 7; // 0 = Monday, 1 = Tuesday, ..., 4 = Friday
     
     //Zobrazení pouze eventů ve dnech po-pá
     let X_week = 0;
     if (dayOfWeek >= 0 && dayOfWeek <= 4) {
-        X_week = (weekNumber * defaultwidth) - defaultwidth;
+        X_week = ((weekNumber-refWeekNumber + 1) * defaultwidth) - defaultwidth;
     }
 
     //Zobrazení eventů ve dnech po-ne (Pokud očekáváme eventy v jiných dnech než Po-Pá)
@@ -137,12 +138,13 @@ const Event = ({referenceMonday, event}) => {
     )
 }
 
-export const EventsSVG = ({events}) => {
+export const EventsSVG = ({events, event}) => {
     const [scroll, setScroll] = useState(0);
     const [scrollX, setScrollX] = useState(0);
     const [scrollY, setScrollY] = useState(0);
     const now = new Date()
-    const prevMonday = new Date(now.getFullYear(), now.getMonth(), (now.getDate()-now.getDay() + 1))
+    /* const prevMonday = new Date(now.getFullYear(), now.getMonth(), (now.getDate()-now.getDay() + 1)) */
+    const prevMonday = event.startdate;
 
     const handleScroll = (event) => {
         setScroll(parseInt(event.target.value, 10));
