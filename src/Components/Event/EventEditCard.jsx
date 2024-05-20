@@ -16,6 +16,7 @@ export const EventEditCard = ({event}) => {
     /* const onCancel = () => {}
     const onOk = () => {}
     const [visible, setVisible] = useState(true) */
+    /* const event_={...event,place:event?.place||""} */
     return (
         <CardCapsule  title={<>Událost <EventLink event={event } /></>}>
             <Row>
@@ -36,6 +37,11 @@ export const EventEditCard = ({event}) => {
             <Row>
                 <Col>
                     <EditableAttributeText item={event} attributeName="enddate" label="Konec" asyncUpdater={UpdateEventAsyncAction} type="datetime-local" />
+                </Col>
+            </Row>
+            <Row>
+                <Col>
+                    <EditableAttributeText item={event_} attributeName="place" label="Místo" asyncUpdater={UpdateEventAsyncAction} />
                 </Col>
             </Row>
         </CardCapsule>

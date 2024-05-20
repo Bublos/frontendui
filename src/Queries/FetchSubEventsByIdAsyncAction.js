@@ -6,6 +6,7 @@ const query = `query ($id: UUID!) {
           __typename
           id
           name
+          place
 
           startdate
           enddate
@@ -26,6 +27,7 @@ const query = `query ($id: UUID!) {
             name
             startdate
             enddate
+            place
           }
       }
     }`

@@ -35,3 +35,5 @@ Based on React, developed with vite stack.
 
 19.5 Doplnění view o zobrazovaní času ve správném formátu,
      Lze měnit barvu eventů
+
+20.5 Konečně fungující link, změna barev smazána

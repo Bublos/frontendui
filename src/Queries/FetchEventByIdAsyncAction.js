@@ -6,6 +6,7 @@ const query = `query ($id: UUID!) {
           __typename
           id
           name
+          place
 
           startdate
           enddate
