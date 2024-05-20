@@ -17,6 +17,10 @@ export const EventEditCard = ({event}) => {
     const onOk = () => {}
     const [visible, setVisible] = useState(true) */
     /* const event_={...event,place:event?.place||""} */
+    let event_ = {...event};
+    if (event_.place === null) {
+        event_.place = '';
+    }
     return (
         <CardCapsule  title={<>Událost <EventLink event={event } /></>}>
             <Row>
