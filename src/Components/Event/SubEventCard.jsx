@@ -8,11 +8,11 @@ import { EventsSVG, getWeekNumber } from './EventsSVG'
 const SubEventRow = ({subEvent}) => {
     const startstring = new Date(subEvent?.startdate).toDateString()
     const endstring = new Date(subEvent?.enddate).toDateString()
-    const weekNumber = getWeekNumber(subEvent.startdate);
+    /* const weekNumber = getWeekNumber(subEvent.startdate); */
     return (
         <tr>
             {/* <td>{subEvent?.id}</td> */}
-            <td>{weekNumber}</td>
+            {/* <td>{weekNumber}</td> */}
             <td><EventLink event={subEvent}>{subEvent?.name}</EventLink></td>
             <td>{startstring}</td>
             <td>{endstring}</td>
@@ -36,7 +36,7 @@ export const SubEventsCard = ({event}) => {
                 <table className='table table-striped table-bordered table-sm'>
                     <thead>
                         <tr>
-                            <th>Týden</th>
+                            {/* <th>Týden</th> */}
                             <th>Název</th>
                             <th>Začátek</th>
                             <th>Konec</th>

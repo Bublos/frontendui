@@ -8,6 +8,7 @@ const query = `query ($id: UUID!) {
           name
           place
           placeId
+          groups { id name }
 
           startdate
           enddate

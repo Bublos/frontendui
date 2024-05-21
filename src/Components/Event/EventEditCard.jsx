@@ -43,11 +43,11 @@ export const EventEditCard = ({event}) => {
                     <EditableAttributeText item={event} attributeName="enddate" label="Konec" asyncUpdater={UpdateEventAsyncAction} type="datetime-local" />
                 </Col>
             </Row>
-            <Row>
+            {/* <Row>
                 <Col>
                     <EditableAttributeText item={event_} attributeName="place" label="Místo" asyncUpdater={UpdateEventAsyncAction} />
                 </Col>
-            </Row>
+            </Row> */}
         </CardCapsule>
     )
 }

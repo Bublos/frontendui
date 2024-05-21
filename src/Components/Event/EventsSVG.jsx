@@ -11,17 +11,23 @@ const defaultheight = defaultheight_half * 2
 
 
 
-const EventRectangle = ({X, Y, L1, L2, L3, L4,event, width=defaultwidth, height=defaultheight}) => {
+const EventRectangle = ({X, Y, L1, L2, L3,event, width=defaultwidth, height=defaultheight}) => {
     return (
         <>
             <rect width={width} height={height} x={X} y={Y} rx="2" ry="2" fill={"#7f7f7f7f"} stroke="black" /> {/* ff00007f */}
             <text x={X} y={Y} fontSize="2em" fontFamily="serif">
                 <tspan dy={28} x={X+10} >
-                    <a href={base + "/event/view/" + event?.id} target="_blank" rel="noopener noreferrer">{L1}</a>
+                    <a href={base + "/event/view/" + event?.id} target="_blank" rel="noopener noreferrer">{L1}</a>  {/* L1 slouží pro název subEventu (event.name) */}
                 </tspan>
-                <tspan dy={40} x={X+10}>{L2}</tspan>
-                <tspan dy={52} x={X+10}>{L3}</tspan>
-                <tspan dy={64} x={X+10}>{L4}</tspan>
+                <tspan dy={40} x={X+10}>{L2}</tspan> {/* L2 slouží pro text */}
+                <tspan dy={52} x={X+10} >
+                    <a href={"/facilities/facility/view/" + event?.placeId} target="_blank" rel="noopener noreferrer">{L3}</a>  {/* L3 slouží pro místo (event.place) */}
+                </tspan> 
+                {event?.groups?.map((group, index) => (
+                <tspan key={index} dy={64} x={X+10}>
+                    <a href={"/ug/group/edit/" + group.id} target="_blank" rel="noopener noreferrer">{group.name}</a>
+                </tspan>
+                ))}
             </text>
         </>
     )
@@ -146,11 +152,11 @@ export const EventsSVG = ({events, event}) => {
     /* const prevMonday = new Date(now.getFullYear(), now.getMonth(), (now.getDate()-now.getDay() + 1)) */
     const prevMonday = event.startdate;
 
-    const handleScroll = (event) => {
+    /* const handleScroll = (event) => {
         setScroll(parseInt(event.target.value, 10));
-    };
+    }; */
 
-    const handleWheel = (event) => {
+    /* const handleWheel = (event) => {
         const deltaX = Math.sign(event.deltaX);
         const deltaY = Math.sign(event.deltaY);
     
@@ -161,12 +167,12 @@ export const EventsSVG = ({events, event}) => {
             // Handle vertical scrolling
             setScrollY(prevScrollY => Math.max(0, prevScrollY + deltaY));
         }
-    };
+    }; */
 
 
     return (
         <div>
-            <input type="range" min="0" max={weeks.length - 16} value={scroll} onChange={handleScroll} />
+            {/* <input type="range" min="0" max={weeks.length - 16} value={scroll} onChange={handleScroll} /> */}
             <svg viewBox={"400 -150 1400 3200"} width="90vmin" height="100vmin" xmlns="http://www.w3.org/2000/svg" > {/* Přidat pokud chceme scroll pomocí kolečka myši/touchpadu : onWheel={handleWheel} */}
                 <g transform={`translate(${-scroll * defaultwidth}, 0)`}>
                 {/* <g transform={`translate(${-scrollX * defaultwidth}, ${-scrollY * defaultwidth})`}> */}  {/* Přidat pokud chceme scroll pomocí kolečka myši/touchpadu */}

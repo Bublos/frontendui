@@ -3,12 +3,12 @@ import {CreateAsyncActionFromMutation } from "@hrbolek/uoisfrontend-shared/src"
 const mutation = `
 mutation($id: UUID!, $lastchange: DateTime!,
   $name: String, $startdate: DateTime, $enddate: DateTime,
-	$eventType_id: UUID, $place: String, $placeId: String
+	$eventType_id: UUID
 ) {
   result: eventUpdate(event:{
     id: $id, lastchange: $lastchange,
     name: $name, startdate: $startdate, enddate:$enddate,
-  	typeId: $eventType_id, place: $place, placeId: $placeId
+  	typeId: $eventType_id
   }) 
   {
     id
@@ -19,8 +19,6 @@ mutation($id: UUID!, $lastchange: DateTime!,
       name
       startdate
       enddate
-      place
-      placeId
       eventType{
         id
         name
