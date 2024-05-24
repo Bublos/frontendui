@@ -23,6 +23,16 @@ const query = `query ($id: UUID!) {
             id
             name
           }
+
+          subEvents {
+            id
+            name
+            startdate
+            enddate
+            place
+            placeId
+            groups { id name }
+          }
       }
     }`
 

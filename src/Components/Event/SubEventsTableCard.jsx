@@ -20,17 +20,26 @@ const SubEventRow = ({subEvent}) => {
     )
 }
 
-export const SubEventsCard = ({event}) => {
-
+export const SubEventsTableCard = ({event}) => {
+    const subEvents = event?.subEvents || []
     return (
         <>
-            <CardCapsule title={<>Událost <EventLink event={event } /></>}>
-                {event.subEvents && event.subEvents.length > 0 ? (
-                    <EventsSVG events={event.subEvents} event={event} />
-                ) : (
-                    <p>Tento Event nemá žádné subEvents.</p>
+        <CardCapsule title={<>Událost <EventLink event={event } /></>}>
+        <table className='table table-striped table-bordered table-sm'>
+            <thead>
+                <tr>
+                    <th>Název</th>
+                    <th>Začátek</th>
+                    <th>Konec</th>
+                </tr>
+            </thead>
+            <tbody>
+                {subEvents.map(
+                    e => <SubEventRow key={e.id} subEvent={e} />
                 )}
-            </CardCapsule>
+            </tbody>
+        </table>
+        </CardCapsule>
         </>
     )
 }

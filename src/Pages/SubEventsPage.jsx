@@ -7,8 +7,9 @@ import { EventsSVG } from "../Components/Event/EventsSVG"
 import { FetchSubEventsByIdAsyncAction } from "../Queries/FetchSubEventsByIdAsyncAction"
 import { SubEventsCard } from "../Components/Event/SubEventCard"
 import { RandomEvents } from "../Components/Event/RandomEvents"
+import { SubEventsTableCard } from "../Components/Event/SubEventsTableCard"
 
-const validator = CreateAsyncQueryValidator({error: "Nepovedlo se načíst uživatele", success: "Načtení uživatele se povedlo"})
+const validator = CreateAsyncQueryValidator({error: "Nepovedlo se načíst subEvents", success: "Načtení subEvents se povedlo"})
 export const SubEventsPage = ()  => {
     const {id} = useParams()
     const [onResolve, onReject] = validator(useDispatch())
@@ -23,7 +24,7 @@ export const SubEventsPage = ()  => {
             //    {JSON.stringify(event)}
             //</div>
             <EventLargeCard event={event}>
-                <SubEventsCard event={event} />
+                <SubEventsTableCard event={event} />
             </EventLargeCard>
 
 
