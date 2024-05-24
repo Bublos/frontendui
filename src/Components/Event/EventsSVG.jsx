@@ -25,7 +25,7 @@ const EventRectangle = ({X, Y, L1, L2, L3,event, width=defaultwidth, height=defa
                 </tspan> 
                 {event?.groups?.map((group, index) => (
                 <tspan key={index} dy={64} x={X+10}>
-                    <a href={"/ug/group/edit/" + group.id} target="_blank" rel="noopener noreferrer">{group.name}</a>
+                    <a href={"/ug/group/view/" + group.id} target="_blank" rel="noopener noreferrer">{group.name}</a>
                 </tspan>
                 ))}
             </text>
@@ -145,9 +145,6 @@ const Event = ({referenceMonday, event}) => {
 }
 
 export const EventsSVG = ({events, event}) => {
-    const [scroll, setScroll] = useState(0);
-    const [scrollX, setScrollX] = useState(0);
-    const [scrollY, setScrollY] = useState(0);
     const now = new Date()
     /* const prevMonday = new Date(now.getFullYear(), now.getMonth(), (now.getDate()-now.getDay() + 1)) */
     const prevMonday = event.startdate;
@@ -174,7 +171,7 @@ export const EventsSVG = ({events, event}) => {
         <div>
             {/* <input type="range" min="0" max={weeks.length - 16} value={scroll} onChange={handleScroll} /> */}
             <svg viewBox={"400 -150 1400 3200"} width="90vmin" height="100vmin" xmlns="http://www.w3.org/2000/svg" > {/* Přidat pokud chceme scroll pomocí kolečka myši/touchpadu : onWheel={handleWheel} */}
-                <g transform={`translate(${-scroll * defaultwidth}, 0)`}>
+                <g >
                 {/* <g transform={`translate(${-scrollX * defaultwidth}, ${-scrollY * defaultwidth})`}> */}  {/* Přidat pokud chceme scroll pomocí kolečka myši/touchpadu */}
                     <EventWeekHeader />
                     {events.map((e) => (

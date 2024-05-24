@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom"
 import { useFreshItem, CreateAsyncQueryValidator, useDispatch } from "@hrbolek/uoisfrontend-shared/src"
 import { FetchEventByIdAsyncAction } from "../Queries/FetchEventByIdAsyncAction"
 import { EventLargeCard } from "../Components/Event/EventLargeCard"
+import { SubEventsCard } from "../Components/Event/SubEventCard"
 
 const validator = CreateAsyncQueryValidator({error: "Nepovedlo se načíst uživatele", success: "Načtení uživatele se povedlo"})
 export const EventPage = ()  => {
@@ -19,7 +20,9 @@ export const EventPage = ()  => {
             //    Eventy nahrány
             //    {JSON.stringify(event)}
             //</div>
-            <EventLargeCard event={event}/>
+            <EventLargeCard event={event}>
+                <SubEventsCard event={event} />
+            </EventLargeCard>
         )
     } else {
         return (

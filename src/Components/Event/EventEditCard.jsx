@@ -5,6 +5,7 @@ import Col from 'react-bootstrap/Col'
 import { UpdateEventAsyncAction } from '../../Queries/UpdateEventAsyncAction'
 import { EventEditType } from './EventEditType'
 import { EventLink } from './EventLink'
+import { EventEditPlace } from './EventEditPlace'
 
 // const changedAsyncActioj = (item)=> {
 //     const changedItem = {...item, value: Number(item.value)}
@@ -41,6 +42,11 @@ export const EventEditCard = ({event}) => {
             <Row>
                 <Col>
                     <EditableAttributeText item={event} attributeName="enddate" label="Konec" asyncUpdater={UpdateEventAsyncAction} type="datetime-local" />
+                </Col>
+            </Row>
+            <Row>
+                <Col>
+                    <EventEditPlace event = {event}/>
                 </Col>
             </Row>
             {/* <Row>
