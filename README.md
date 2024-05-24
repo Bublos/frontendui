@@ -39,3 +39,4 @@ Based on React, developed with vite stack.
 20.5 Konečně fungující link, změna barev smazána
 
 24.5 Dodělat view page - rozdělit komponenty, k edit page dodělat button na vytvoření eventu
+     Rozdělení komponenty SubEventCard na dvě, dodělaní editace Místa pomocí EditableAttributeSelect
