@@ -5,13 +5,14 @@ import { EventLink } from './EventLink';
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import { FetchSearchFacilityAsyncAction } from '../../Queries/FetchSearchFacilityAsyncAction';
+import { FetchFacilityAsyncAction } from '../../Queries/FetchFacilityAsyncAction';
 
 const id = "7132701c-574a-41fe-9d52-17d68d20dab1";
 
 export const EventEditPlace = ({ event }) => {
     const dispatch = useDispatch();
     const [facilityData, setFacilityData] = useState([]);
-    const [facility, facilityPromise] = useFreshItem({ id }, FetchSearchFacilityAsyncAction);
+    const [facility, facilityPromise] = useFreshItem({ id }, FetchFacilityAsyncAction);
 
     useEffect(() => {
         if (facilityPromise && typeof facilityPromise.then === 'function') {
