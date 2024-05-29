@@ -5,21 +5,6 @@ import { EventLink } from './EventLink'
 import { UserLink } from '../User/UserLink'
 import { EventsSVG, getWeekNumber } from './EventsSVG'
 
-const SubEventRow = ({subEvent}) => {
-    const startstring = new Date(subEvent?.startdate).toDateString()
-    const endstring = new Date(subEvent?.enddate).toDateString()
-    /* const weekNumber = getWeekNumber(subEvent.startdate); */
-    return (
-        <tr>
-            {/* <td>{subEvent?.id}</td> */}
-            {/* <td>{weekNumber}</td> */}
-            <td><EventLink event={subEvent}>{subEvent?.name}</EventLink></td>
-            <td>{startstring}</td>
-            <td>{endstring}</td>
-        </tr>
-    )
-}
-
 export const SubEventsCard = ({event}) => {
 
     return (

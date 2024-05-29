@@ -3,11 +3,9 @@ import { useParams } from "react-router-dom"
 //import { UserLargeCard } from "../Components"
 import { useFreshItem, CreateAsyncQueryValidator, useDispatch } from "@hrbolek/uoisfrontend-shared/src"
 import { EventLargeCard } from "../Components/Event/EventLargeCard"
-import { EventsSVG } from "../Components/Event/EventsSVG"
 import { FetchSubEventsByIdAsyncAction } from "../Queries/FetchSubEventsByIdAsyncAction"
-import { SubEventsCard } from "../Components/Event/SubEventCard"
-import { RandomEvents } from "../Components/Event/RandomEvents"
 import { SubEventsTableCard } from "../Components/Event/SubEventsTableCard"
+import { EventCreateButton } from "../Components/Event/EventCreateButton"
 
 const validator = CreateAsyncQueryValidator({error: "Nepovedlo se načíst subEvents", success: "Načtení subEvents se povedlo"})
 export const SubEventsPage = ()  => {
@@ -25,6 +23,8 @@ export const SubEventsPage = ()  => {
             //</div>
             <EventLargeCard event={event}>
                 <SubEventsTableCard event={event} />
+                <br></br>
+                <EventCreateButton masterevent_id={event.id} />
             </EventLargeCard>
 
 

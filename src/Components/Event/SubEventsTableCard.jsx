@@ -1,13 +1,24 @@
-import { CardCapsule } from '@hrbolek/uoisfrontend-shared/src'
+import { CardCapsule, DeleteButton, useDispatch } from '@hrbolek/uoisfrontend-shared/src'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import { EventLink } from './EventLink'
 import { UserLink } from '../User/UserLink'
 import { EventsSVG, getWeekNumber } from './EventsSVG'
+import { DeleteEventAsyncAction } from '../../Queries/DeleteEventAsyncAction'
+import { FetchSubEventsByIdAsyncAction } from '../../Queries/FetchSubEventsByIdAsyncAction'
 
-const SubEventRow = ({subEvent}) => {
+const SubEventRow = ({subEvent, masterEvent}) => {
     const startstring = new Date(subEvent?.startdate).toDateString()
     const endstring = new Date(subEvent?.enddate).toDateString()
+    const dispatch=useDispatch()
+    const onClick=()=>{
+        const updater = async () => {
+            const variables={id: subEvent.id}
+            await dispatch(DeleteEventAsyncAction(variables))
+            await dispatch(FetchSubEventsByIdAsyncAction(masterEvent))
+        }
+        updater()
+    }
     /* const weekNumber = getWeekNumber(subEvent.startdate); */
     return (
         <tr>
@@ -16,12 +27,14 @@ const SubEventRow = ({subEvent}) => {
             <td><EventLink event={subEvent}>{subEvent?.name}</EventLink></td>
             <td>{startstring}</td>
             <td>{endstring}</td>
+            <td><DeleteButton onClick={onClick}>D</DeleteButton></td>
         </tr>
     )
 }
 
 export const SubEventsTableCard = ({event}) => {
     const subEvents = event?.subEvents || []
+    const sortedSubEvents = [...subEvents].sort((a, b) => new Date(a.startdate) - new Date(b.startdate));
     return (
         <>
         <CardCapsule title={<>Událost <EventLink event={event } /></>}>
@@ -31,11 +44,12 @@ export const SubEventsTableCard = ({event}) => {
                     <th>Název</th>
                     <th>Začátek</th>
                     <th>Konec</th>
+                    <th>Smazat</th>
                 </tr>
             </thead>
             <tbody>
-                {subEvents.map(
-                    e => <SubEventRow key={e.id} subEvent={e} />
+                {sortedSubEvents.map(
+                    e => <SubEventRow key={e.id} subEvent={e} masterEvent={event} />
                 )}
             </tbody>
         </table>

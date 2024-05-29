@@ -1,47 +1,38 @@
-import { useFreshItem, EditableAttributeSelect } from '@hrbolek/uoisfrontend-shared/src';
+import { useFreshItem, EditableAttributeSelect, SearchInput, useDispatch, CardCapsule } from '@hrbolek/uoisfrontend-shared/src';
 import { UpdateEventAsyncAction } from '../../Queries/UpdateEventAsyncAction';
-import { FetchFacilityAsyncAction } from '../../Queries/FetchFacilityAsyncAction';
-import { useState, useEffect } from 'react';
-
-const id = "7132701c-574a-41fe-9d52-17d68d20dab1";
+import { useState, useEffect, useCallback } from 'react';
+import { EventLink } from './EventLink';
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
+import { FetchSearchFacilityAsyncAction } from '../../Queries/FetchSearchFacilityAsyncAction';
+import { FetchEventByIdAsyncAction } from '../../Queries/FetchEventByIdAsyncAction';
 
 export const EventEditPlace = ({ event }) => {
-    const [facilitydata, setFacilityData] = useState([]);
-    const [facility, facilityPromise] = useFreshItem({ id }, FetchFacilityAsyncAction);
+    const dispatch = useDispatch();
+    const [facilityData, setFacilityData] = useState([]);
+    const [selectedPlace, setSelectedPlace] = useState({}); // State to store selected place
+    const currentDate = new Date().toISOString();
 
-    useEffect(() => {
-        if (facilityPromise && typeof facilityPromise.then === 'function') {
-            facilityPromise.then(json => {
-                const facilities = json?.data?.result;
-                if (facilities) {
-                    setFacilityData(facilities);
-                }
-            }).catch(error => {
-                console.error("Failed to fetch facilities:", error);
-            });
-        } else {
-            console.error("facilityPromise is not a valid promise:", facilityPromise);
-        }
-    }, [facilityPromise]);
-
-    const eventEx = { ...event, placeId: event?.placeId, place: event?.place };
-
-    const handleUpdate = (updatedEvent) => {
-        const selectedFacility = facilitydata.find(facility => facility.id === updatedEvent.placeId);
-        const updatedEventWithPlace = {
-            ...updatedEvent,
-            place: selectedFacility ? selectedFacility.name : ''
-        };
-        return UpdateEventAsyncAction(updatedEventWithPlace);
-    };
+    const onChange = async (place) => {
+        // Update selected place state
+        setSelectedPlace(place);
+        
+        // Dispatch actions to update event
+        await dispatch(UpdateEventAsyncAction({ id: event.id, lastchange: currentDate, placeId: place.id, place: place.name }));
+        await dispatch(FetchEventByIdAsyncAction({ id: event.id }));
+    }
 
     return (
-        <div>
-            <EditableAttributeSelect item={eventEx} attributeName="placeId" label="Místo" asyncUpdater={handleUpdate}>
-                {facilitydata.map(facility => (
-                    <option key={facility.id} value={facility.id}>{facility.name}</option>
-                ))}
-            </EditableAttributeSelect>
-        </div>
+        <CardCapsule title={<>Místo <EventLink event={event} /></>}>
+            <Row>
+                <Col>
+                    <SearchInput
+                        label="Výběr Místa"
+                        FetchByPatternAsyncAction={FetchSearchFacilityAsyncAction}
+                        onSelect={onChange}
+                    />
+                </Col>
+            </Row>
+        </CardCapsule>
     );
 };
