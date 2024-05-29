@@ -1,38 +1,62 @@
 import { useFreshItem, EditableAttributeSelect, SearchInput, useDispatch, CardCapsule } from '@hrbolek/uoisfrontend-shared/src';
 import { UpdateEventAsyncAction } from '../../Queries/UpdateEventAsyncAction';
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect } from 'react';
 import { EventLink } from './EventLink';
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import { FetchSearchFacilityAsyncAction } from '../../Queries/FetchSearchFacilityAsyncAction';
-import { FetchEventByIdAsyncAction } from '../../Queries/FetchEventByIdAsyncAction';
+
+const id = "7132701c-574a-41fe-9d52-17d68d20dab1";
 
 export const EventEditPlace = ({ event }) => {
     const dispatch = useDispatch();
     const [facilityData, setFacilityData] = useState([]);
-    const [selectedPlace, setSelectedPlace] = useState({}); // State to store selected place
-    const currentDate = new Date().toISOString();
+    const [facility, facilityPromise] = useFreshItem({ id }, FetchSearchFacilityAsyncAction);
 
-    const onChange = async (place) => {
-        // Update selected place state
-        setSelectedPlace(place);
-        
-        // Dispatch actions to update event
-        await dispatch(UpdateEventAsyncAction({ id: event.id, lastchange: currentDate, placeId: place.id, place: place.name }));
-        await dispatch(FetchEventByIdAsyncAction({ id: event.id }));
-    }
+    useEffect(() => {
+        if (facilityPromise && typeof facilityPromise.then === 'function') {
+            facilityPromise.then(json => {
+                const facilities = json?.data?.result;
+                if (facilities) {
+                    setFacilityData(facilities);
+                }
+            }).catch(error => {
+                console.error("Failed to fetch facilities:", error);
+            });
+        } else {
+            console.error("facilityPromise is not a valid promise:", facilityPromise);
+        }
+    }, [facilityPromise]);
 
-    return (
-        <CardCapsule title={<>Místo <EventLink event={event} /></>}>
-            <Row>
-                <Col>
+    const eventEx = { ...event, placeId: event?.placeId, place: event?.place };
+
+    const handleUpdate = async (placeId) => {
+        const selectedFacility = facilityData.find(facility => facility.id === placeId);
+        const updatedEvent = {
+            ...event,
+            placeId,
+            place: selectedFacility ? selectedFacility.name : ''
+        };
+
+        try {
+            await dispatch(UpdateEventAsyncAction(updatedEvent));
+        } catch (error) {
+            console.error("Failed to update event:", error);
+        }
+    };
+
+        return (
+            <CardCapsule title={<>Místo < EventLink event={event }/></>}>
+                <Row>
+                    <Col>
                     <SearchInput
-                        label="Výběr Místa"
-                        FetchByPatternAsyncAction={FetchSearchFacilityAsyncAction}
-                        onSelect={onChange}
-                    />
-                </Col>
-            </Row>
-        </CardCapsule>
-    );
+                label="Výběr Místa"
+                FetchByPatternAsyncAction={FetchSearchFacilityAsyncAction}
+                onSelect={handleUpdate}
+            />
+                    </Col>
+                </Row>
+                
+            </CardCapsule>
+        );
 };
