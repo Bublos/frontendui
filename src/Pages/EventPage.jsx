@@ -14,6 +14,7 @@ export const EventPage = ()  => {
     eventPromise.then(onResolve, onReject)
 
     if (event) {
+        console.log("Event", event.subEvents);
         return (
             //<UserLargeCard user={user} />
             //<div>
@@ -21,7 +22,7 @@ export const EventPage = ()  => {
             //    {JSON.stringify(event)}
             //</div>
             <EventLargeCard event={event}>
-                <SubEventsViewCard event={event} />
+                <SubEventsViewCard subEvents={event.subEvents} />
             </EventLargeCard>
         )
     } else {

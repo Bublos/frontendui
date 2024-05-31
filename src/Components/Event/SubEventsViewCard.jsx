@@ -5,15 +5,17 @@ import { EventLink } from './EventLink'
 import { UserLink } from '../User/UserLink'
 import { EventsSVG, getWeekNumber } from './EventsSVG'
 
-export const SubEventsViewCard = ({event}) => {
-
+export const SubEventsViewCard = ({subEvents}) => {
+    console.log("Eventy2",subEvents);
     return (
+        
         <>
-            <CardCapsule title={<>Událost <EventLink event={event } /></>}>
-                {event.subEvents && event.subEvents.length > 0 ? (
-                    <EventsSVG events={event.subEvents} event={event} />
+            <CardCapsule title={<>Rozvrh</>}>
+                {subEvents && subEvents.length > 0 ? (
+                    <EventsSVG events={subEvents} />
                 ) : (
                     <p>Tento Event nemá žádné subEvents.</p>
+
                 )}
             </CardCapsule>
         </>

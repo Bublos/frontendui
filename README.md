@@ -42,3 +42,5 @@ Based on React, developed with vite stack.
      Rozdělení komponenty SubEventCard na dvě, dodělaní editace Místa pomocí EditableAttributeSelect
 
 25-31.5 Přidání editace groups + delete, správné zpracování edit place.
+
+31.5 - změna SubEventsEdit a view card

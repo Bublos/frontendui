@@ -7,7 +7,7 @@ import { EventsSVG, getWeekNumber } from './EventsSVG'
 import { DeleteEventAsyncAction } from '../../Queries/DeleteEventAsyncAction'
 import { FetchSubEventsByIdAsyncAction } from '../../Queries/FetchSubEventsByIdAsyncAction'
 
-const SubEventRow = ({subEvent, masterEvent}) => {
+const SubEventRow = ({subEvent}) => {
     const startstring = new Date(subEvent?.startdate).toDateString()
     const endstring = new Date(subEvent?.enddate).toDateString()
     const dispatch=useDispatch()
@@ -15,7 +15,7 @@ const SubEventRow = ({subEvent, masterEvent}) => {
         const updater = async () => {
             const variables={id: subEvent.id}
             await dispatch(DeleteEventAsyncAction(variables))
-            await dispatch(FetchSubEventsByIdAsyncAction(masterEvent))
+            await dispatch(FetchSubEventsByIdAsyncAction(subEvent.masterEvent.id))
         }
         updater()
     }
@@ -32,12 +32,11 @@ const SubEventRow = ({subEvent, masterEvent}) => {
     )
 }
 
-export const SubEventsEditCard = ({event}) => {
-    const subEvents = event?.subEvents || []
+export const SubEventsEditCard = ({subEvents}) => {
     const sortedSubEvents = [...subEvents].sort((a, b) => new Date(a.startdate) - new Date(b.startdate));
     return (
         <>
-        <CardCapsule title={<>Událost <EventLink event={event } /></>}>
+        <CardCapsule title={<>SubEvents</>}>
         <table className='table table-striped table-bordered table-sm'>
             <thead>
                 <tr>
@@ -49,7 +48,7 @@ export const SubEventsEditCard = ({event}) => {
             </thead>
             <tbody>
                 {sortedSubEvents.map(
-                    e => <SubEventRow key={e.id} subEvent={e} masterEvent={event} />
+                    e => <SubEventRow key={e.id} subEvent={e}/>
                 )}
             </tbody>
         </table>

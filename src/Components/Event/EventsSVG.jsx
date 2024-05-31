@@ -144,10 +144,10 @@ const Event = ({referenceMonday, event}) => {
     )
 }
 
-export const EventsSVG = ({events, event}) => {
+export const EventsSVG = ({events}) => {
     const now = new Date()
     /* const prevMonday = new Date(now.getFullYear(), now.getMonth(), (now.getDate()-now.getDay() + 1)) */
-    const prevMonday = event.startdate;
+    const prevMonday = new Date('2023-03-01T00:00:00');
 
     /* const handleScroll = (event) => {
         setScroll(parseInt(event.target.value, 10));
