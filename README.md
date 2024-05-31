@@ -40,3 +40,5 @@ Based on React, developed with vite stack.
 
 24.5 Dodělat view page - rozdělit komponenty, k edit page dodělat button na vytvoření eventu
      Rozdělení komponenty SubEventCard na dvě, dodělaní editace Místa pomocí EditableAttributeSelect
+
+25-31.5 Přidání editace groups + delete, správné zpracování edit place.

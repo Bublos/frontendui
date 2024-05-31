@@ -33,10 +33,6 @@ export const EventMediumCard = ({event}) => {
                 <Col>Typ</Col>
                 <Col>{event?.eventType?.name}</Col>
             </Row>
-            <Row>
-                <Col>Místo</Col>
-                <Col>{event?.place}</Col>
-            </Row>
             <br></br>
             <Row>
                 <Col>Počátek</Col>

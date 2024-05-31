@@ -10,6 +10,7 @@ import { EventEditPlace } from './EventEditPlace'
 import { FetchSearchGroupAsyncAction } from '../../Queries/FetchSearchGroupAsyncAction'
 import {  EventGroupInsertAsyncAction } from '../../Queries/EventGroupInsertAsyncAction'
 import { FetchEventByIdAsyncAction } from '../../Queries/FetchEventByIdAsyncAction'
+import { EventGroupDeleteAsyncAction } from '../../Queries/EventGroupDeleteAsyncAction'
 /* import { FetchSearchGroupAsyncAction } from '../../Queries/FetchSearchGroupAsyncAction'
 import { EventEditGroup } from './EventEditGroup' */
 
@@ -62,39 +63,26 @@ const AddGroupDialog = ({onCreate}) => {
 }
 
 
-
-
-
-
-export const EventEditGroup = ({event}) => {
+const GroupRow = ({group, event}) => {
     const dispatch = useDispatch()
-
-    const onGroupAdd = async (groupId) => {
-        await dispatch(EventGroupInsertAsyncAction({groupId, eventId: event.id}))
-        await dispatch(FetchEventByIdAsyncAction(event))
+    const onClick=()=>{
+        const updater = async () => {
+            const variables={groupId: group.id, eventId: event.id}
+            await dispatch(EventGroupDeleteAsyncAction(variables))
+            await dispatch(FetchEventByIdAsyncAction(event))
+        }
+        updater()
     }
-
-    return (
-        <CardCapsule  title={<>Skupiny < EventLink event={event }/></>}>
-            <Row>
-                <Col>
-                <SearchInput title="Výběr Skupiny" onSelect={onGroupAdd} FetchByPatternAsyncAction={FetchSearchGroupAsyncAction} />
-                </Col>
-            </Row>
-        </CardCapsule>
-    )
-}
-
-const GroupRow = ({group}) => {
     return (
         <tr>
             <td>{group.name}</td>
+            <td><DeleteButton onClick={onClick}>D</DeleteButton></td>
         </tr>
     )
 }
 
 const validator = CreateAsyncQueryValidator({error: "Nepovedlo se přidat skupinu", success: "Přidání skupiny se povedlo"})
-export const GroupsTableCard = ({event}) => {
+export const EventEditGroup = ({event}) => {
     const groups = event?.groups || []
     const dispatch=useDispatch()
     
@@ -121,11 +109,12 @@ export const GroupsTableCard = ({event}) => {
             <thead>
                 <tr>
                     <th>Název</th>
+                    <th>Smazat</th>
                 </tr>
             </thead>
             <tbody>
                 {groups.map(
-                    g => <GroupRow key={g.id} group={g} />
+                    g => <GroupRow key={g.id} group={g} event={event}/>
                 )}
             <tr>
                 {/* <td colSpan={5}><button className='btn btn-success form-control' >+</button></td> */}
