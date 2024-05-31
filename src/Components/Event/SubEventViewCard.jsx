@@ -5,7 +5,7 @@ import { EventLink } from './EventLink'
 import { UserLink } from '../User/UserLink'
 import { EventsSVG, getWeekNumber } from './EventsSVG'
 
-export const SubEventsCard = ({event}) => {
+export const SubEventsViewCard = ({event}) => {
 
     return (
         <>

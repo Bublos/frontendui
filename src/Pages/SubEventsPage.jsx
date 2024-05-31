@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom"
 import { useFreshItem, CreateAsyncQueryValidator, useDispatch } from "@hrbolek/uoisfrontend-shared/src"
 import { EventLargeCard } from "../Components/Event/EventLargeCard"
 import { FetchSubEventsByIdAsyncAction } from "../Queries/FetchSubEventsByIdAsyncAction"
-import { SubEventsTableCard } from "../Components/Event/SubEventsTableCard"
+import { SubEventsEditCard } from "../Components/Event/SubEventsEditCard"
 import { EventCreateButton } from "../Components/Event/EventCreateButton"
 
 const validator = CreateAsyncQueryValidator({error: "Nepovedlo se načíst subEvents", success: "Načtení subEvents se povedlo"})
@@ -22,7 +22,7 @@ export const SubEventsPage = ()  => {
             //    {JSON.stringify(event)}
             //</div>
             <EventLargeCard event={event}>
-                <SubEventsTableCard event={event} />
+                <SubEventsEditCard event={event} />
                 <br></br>
                 <EventCreateButton masterevent_id={event.id} />
             </EventLargeCard>

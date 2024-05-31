@@ -32,7 +32,7 @@ const SubEventRow = ({subEvent, masterEvent}) => {
     )
 }
 
-export const SubEventsTableCard = ({event}) => {
+export const SubEventsEditCard = ({event}) => {
     const subEvents = event?.subEvents || []
     const sortedSubEvents = [...subEvents].sort((a, b) => new Date(a.startdate) - new Date(b.startdate));
     return (

@@ -6,7 +6,6 @@ import { UserPage, UserEditPage, UserRolesEditPage, GroupPage, GroupEditPage, Gr
 import { SearchPage } from "./Pages/SearchPage";
 import { EventPage } from "./Pages/EventPage";
 import { EventEditPage } from "./Pages/EventEditPage";
-import { EventPresencesPage } from "./Pages/EventPresencesPage";
 import { base } from "./config";
 import { SubEventsPage } from "./Pages/SubEventsPage";
 
@@ -26,11 +25,6 @@ export const Routes = [
     {
         path: base + "/event/view/:id",
         element: <EventPage />,
-        errorElement: <SearchPage />,
-    },
-    {
-        path: base + "/eventpresences/view/:id",
-        element: <EventPresencesPage />,
         errorElement: <SearchPage />,
     },
     {
