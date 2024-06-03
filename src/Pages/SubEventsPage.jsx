@@ -23,8 +23,6 @@ export const SubEventsPage = ()  => {
             //</div>
             <EventLargeCard event={event}>
                 <SubEventsEditCard subEvents={event.subEvents} />
-                <br></br>
-                {/* <EventCreateButton masterevent_id={event.id} /> */}
             </EventLargeCard>
 
 

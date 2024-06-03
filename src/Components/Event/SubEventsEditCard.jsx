@@ -51,13 +51,12 @@ export const SubEventsEditCard = ({subEvents}) => {
                 {sortedSubEvents.map(
                     e => <SubEventRow key={e.id} subEvent={e}/>
                 )}
-                <br></br>
-                <tr>
-                    <EventCreateButton masterevent_id={subEvents[0].masterEvent.id} />
-                </tr>
+                
+                    
             </tbody>
             
         </table>
+        <EventCreateButton masterevent_id={subEvents[0].masterEvent.id} />
         </CardCapsule>
         </>
     )
