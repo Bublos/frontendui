@@ -1,5 +1,6 @@
 import {useDispatch } from "@hrbolek/uoisfrontend-shared/src"
 import {CreateEventAsyncAction } from "../../Queries/CreateEventAsyncAction";
+import {FetchSubEventsByIdAsyncAction} from "../../Queries/FetchSubEventsByIdAsyncAction";
 
 const CreateRandomEvent = ({masterevent_id}) => {
     let currentDate = new Date();
@@ -18,11 +19,16 @@ const CreateRandomEvent = ({masterevent_id}) => {
  
 export const EventCreateButton = ({masterevent_id}) => {
     const dispatch = useDispatch()
-    const onClick = () => {
-        const data = CreateRandomEvent({masterevent_id});
-        dispatch(CreateEventAsyncAction(data));
-        console.log("fired creation of event", data);
+    const onClick=()=>{
+        const updater = async () => {
+            const data=CreateRandomEvent({masterevent_id});
+            await dispatch(CreateEventAsyncAction(data));
+            await dispatch(FetchSubEventsByIdAsyncAction({id: masterevent_id}))
+            console.log("fired creation of event", data);
+        }
+        updater()
     }
+
     return (
         <button className="btn btn-outline-success" onClick={onClick}>Přidej event</button>
     )

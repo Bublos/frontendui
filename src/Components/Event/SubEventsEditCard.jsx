@@ -6,6 +6,7 @@ import { UserLink } from '../User/UserLink'
 import { EventsSVG, getWeekNumber } from './EventsSVG'
 import { DeleteEventAsyncAction } from '../../Queries/DeleteEventAsyncAction'
 import { FetchSubEventsByIdAsyncAction } from '../../Queries/FetchSubEventsByIdAsyncAction'
+import { EventCreateButton } from './EventCreateButton'
 
 const SubEventRow = ({subEvent}) => {
     const startstring = new Date(subEvent?.startdate).toDateString()
@@ -15,7 +16,7 @@ const SubEventRow = ({subEvent}) => {
         const updater = async () => {
             const variables={id: subEvent.id}
             await dispatch(DeleteEventAsyncAction(variables))
-            await dispatch(FetchSubEventsByIdAsyncAction(subEvent.masterEvent.id))
+            await dispatch(FetchSubEventsByIdAsyncAction({id: subEvent.masterEvent.id}))
         }
         updater()
     }
@@ -50,7 +51,12 @@ export const SubEventsEditCard = ({subEvents}) => {
                 {sortedSubEvents.map(
                     e => <SubEventRow key={e.id} subEvent={e}/>
                 )}
+                <br></br>
+                <tr>
+                    <EventCreateButton masterevent_id={subEvents[0].masterEvent.id} />
+                </tr>
             </tbody>
+            
         </table>
         </CardCapsule>
         </>
