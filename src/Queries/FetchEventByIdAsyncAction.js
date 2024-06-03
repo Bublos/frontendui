@@ -32,6 +32,7 @@ const query = `query ($id: UUID!) {
             place
             placeId
             groups { id name }
+            masterEvent{ id name}
           }
       }
     }`
