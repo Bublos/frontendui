@@ -5,13 +5,9 @@ import Col from 'react-bootstrap/Col'
 import { UpdateEventAsyncAction } from '../../Queries/UpdateEventAsyncAction'
 import { EventEditType } from './EventEditType'
 import { EventLink } from './EventLink'
-/* import { FetchSearchGroupAsyncAction } from '../../Queries/FetchSearchGroupAsyncAction'
-import { EventEditGroup } from './EventEditGroup' */
+import { EventEditPlace } from './EventEditPlace'
+import { EventEditGroups } from './EventEditGroups'
 
-// const changedAsyncActioj = (item)=> {
-//     const changedItem = {...item, value: Number(item.value)}
-//     return UpdateEventAsyncAction(changedItem)
-// }
 const validator = CreateAsyncQueryValidator({error: "Nepovedlo se přidat skupinu", success: "Přidání skupiny se povedlo"})
 export const EventEditCard = ({event}) => {
 
@@ -37,6 +33,11 @@ export const EventEditCard = ({event}) => {
                     <EditableAttributeText item={event} attributeName="enddate" label="Konec" asyncUpdater={UpdateEventAsyncAction} type="datetime-local" />
                 </Col>
             </Row>
+            <br></br>
+            <EventEditGroups event = {event} />
+            <br></br>
+            <EventEditPlace event = {event} />
         </CardCapsule>
+        
     )
 }

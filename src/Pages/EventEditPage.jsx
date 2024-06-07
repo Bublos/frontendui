@@ -5,8 +5,8 @@ import { useFreshItem, CreateAsyncQueryValidator, useDispatch } from "@hrbolek/u
 import { FetchEventByIdAsyncAction } from "../Queries/FetchEventByIdAsyncAction"
 import { EventLargeCard } from "../Components/Event/EventLargeCard"
 import { EventEditCard } from "../Components/Event/EventEditCard"
-import { EventEditGroup } from "../Components/Event/EventEditGroup"
 import { EventEditPlace } from "../Components/Event/EventEditPlace"
+import { EventEditGroups } from "../Components/Event/EventEditGroups"
 
 const validator = CreateAsyncQueryValidator({error: "Nepovedlo se načíst event", success: "Načtení eventu se povedlo"})
 export const EventEditPage = ()  => {
@@ -24,8 +24,6 @@ export const EventEditPage = ()  => {
             //</div>
             <EventLargeCard event={event}>
                 <EventEditCard event = {event} />
-                <EventEditGroup event = {event} />
-                <EventEditPlace event = {event} />
             </EventLargeCard>
         )
     } else {

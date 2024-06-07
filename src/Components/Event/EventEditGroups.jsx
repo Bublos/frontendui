@@ -82,7 +82,7 @@ const GroupRow = ({group, event}) => {
 }
 
 const validator = CreateAsyncQueryValidator({error: "Nepovedlo se přidat skupinu", success: "Přidání skupiny se povedlo"})
-export const EventEditGroup = ({event}) => {
+export const EventEditGroups = ({event}) => {
     const groups = event?.groups || []
     const dispatch=useDispatch()
     

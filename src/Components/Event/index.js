@@ -1,5 +1,5 @@
 export * from "./EventEditCard"
-export * from "./EventEditGroup"
+export * from "./EventEditGroups"
 export * from "./EventEditPlace"
 export * from "./EventEditType"
 export * from "./EventLargeCard"

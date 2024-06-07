@@ -8,7 +8,7 @@ import { SubEventsEditCard } from "../Components/Event/SubEventsEditCard"
 import { EventCreateButton } from "../Components/Event/EventCreateButton"
 
 const validator = CreateAsyncQueryValidator({error: "Nepovedlo se načíst subEvents", success: "Načtení subEvents se povedlo"})
-export const SubEventsPage = ()  => {
+export const EventsEditPage = ()  => {
     const {id} = useParams()
     const [onResolve, onReject] = validator(useDispatch())
     const [event, eventPromise] = useFreshItem({id}, FetchSubEventsByIdAsyncAction )

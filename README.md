@@ -44,3 +44,5 @@ Based on React, developed with vite stack.
 25-31.5 Přidání editace groups + delete, správné zpracování edit place.
 
 31.5 - změna SubEventsEdit a view card
+
+7.6 - Uprava různých verzí menu a dalšćih chyb, na které jse mbyl upozorněn v mailu

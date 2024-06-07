@@ -15,7 +15,7 @@ export const EventMediumCard = ({event}) => {
     const laststring = new Date(event?.lastchange).toDateString()
     const createstring = new Date(event?.created).toDateString()
     return (
-        <CardCapsule  title={<>Událost <EventLink event={event } /></>}>
+        <CardCapsule  title={<>Základní informace <EventLink event={event } /></>}>
             {
             event?.masterEvent?
                 <Row>
