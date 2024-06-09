@@ -25,12 +25,12 @@ export const EventLargeCard = ({event, children}) => {
             </Col>
             
         </Row>
-        {/* <br />
+        <br />
         <Row>
             <Col>
                 {JSON.stringify(event)}
             </Col>
-        </Row> */}
+        </Row>
         {/* <EventsSVG events={event}/> */}
 
     </CardCapsule>

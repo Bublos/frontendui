@@ -6,6 +6,8 @@ import { EventLargeCard } from "../Components/Event/EventLargeCard"
 import { FetchSubEventsByIdAsyncAction } from "../Queries/FetchSubEventsByIdAsyncAction"
 import { SubEventsEditCard } from "../Components/Event/SubEventsEditCard"
 import { EventCreateButton } from "../Components/Event/EventCreateButton"
+import { EventEditGroups } from "../Components/Event/EventEditGroups"
+import { EventEditPlace } from "../Components/Event/EventEditPlace"
 
 const validator = CreateAsyncQueryValidator({error: "Nepovedlo se načíst subEvents", success: "Načtení subEvents se povedlo"})
 export const EventsEditPage = ()  => {
@@ -23,6 +25,8 @@ export const EventsEditPage = ()  => {
             //</div>
             <EventLargeCard event={event}>
                 <SubEventsEditCard subEvents={event.subEvents} />
+                <EventEditGroups event = {event} />
+                <EventEditPlace event = {event} />
             </EventLargeCard>
 
 

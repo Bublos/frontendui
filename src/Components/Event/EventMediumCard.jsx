@@ -33,6 +33,15 @@ export const EventMediumCard = ({event}) => {
                 <Col>Typ</Col>
                 <Col>{event?.eventType?.name}</Col>
             </Row>
+            {
+            event?.place?
+                <Row>
+                    <Col>Místo</Col>
+                    <Col><a href={`/facilities/facility/view/${event.placeId}`}>{event.place}</a></Col>
+                </Row>
+                :""
+
+            }
             <br></br>
             <Row>
                 <Col>Počátek</Col>

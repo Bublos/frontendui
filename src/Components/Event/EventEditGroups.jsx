@@ -104,7 +104,7 @@ export const EventEditGroups = ({event}) => {
     
     return (
         <>
-        <CardCapsule title={<>Skupiny <EventLink event={event } /></>}>
+        <CardCapsule title={<>Skupiny </>}>
         <table className='table table-striped table-bordered table-sm'>
             <thead>
                 <tr>
