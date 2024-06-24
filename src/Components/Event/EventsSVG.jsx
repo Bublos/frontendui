@@ -19,12 +19,12 @@ const EventRectangle = ({X, Y, L1, L2, L3,event, width=defaultwidth, height=defa
                 <tspan dy={28} x={X+10} >
                     <a href={base + "/event/view/" + event?.id} target="_blank" rel="noopener noreferrer">{L1}</a>  {/* L1 slouží pro název subEventu (event.name) */}
                 </tspan>
-                <tspan dy={40} x={X+10}>{L2}</tspan> {/* L2 slouží pro text */}
-                <tspan dy={52} x={X+10} >
+                <tspan dy={35} x={X+5}>{L2}</tspan> {/* L2 slouží pro text */}
+                <tspan dy={30} x={X+10} >
                     <a href={"/facilities/facility/view/" + event?.placeId} target="_blank" rel="noopener noreferrer">{L3}</a>  {/* L3 slouží pro místo (event.place) */}
                 </tspan> 
                 {event?.groups?.map((group, index) => (
-                <tspan key={index} dy={64} x={X+10}>
+                <tspan key={index} dy={35} x={X+10}>
                     <a href={"/ug/group/view/" + group.id} target="_blank" rel="noopener noreferrer">{group.name}</a>
                 </tspan>
                 ))}
@@ -36,8 +36,8 @@ const EventRectangle = ({X, Y, L1, L2, L3,event, width=defaultwidth, height=defa
 const EventDayHeader = ({day, Y}) => {
     return (
         <g>
-            {/* <EventRectangle X={-200} Y={Y} L1={day} L2={day} L3={day} L4={day} height="600"/> */}
-            <EventRectangle X={-defaultwidth * 2} Y={Y} L4={day} height={defaultheight * 4}/>
+            <EventRectangle X={-300} Y={Y} L2={day} height="575"/>
+            {/* <EventRectangle X={-defaultwidth * 2} Y={Y} L4={day} height={defaultheight * 4}/> */}
             <EventRectangle X={-defaultwidth} Y={Y + 0} L2={"1-2"} />
             <EventRectangle X={-defaultwidth} Y={Y + defaultheight} L2={"3-4"} />
             <EventRectangle X={-defaultwidth} Y={Y + defaultheight * 2} L2={"5-6"} />
@@ -111,6 +111,7 @@ const Event = ({referenceMonday, event}) => {
     const weekNumber = getWeekNumber(event.startdate);
     const refWeekNumber = getWeekNumber(referenceMonday);
     const date = new Date(event.startdate);
+    const formattedDate = date.toLocaleDateString('cs-CZ', { day: 'numeric', month: 'numeric', year: 'numeric' });
     const dayOfWeek = (date.getDay() + 6) % 7; // 0 = Monday, 1 = Tuesday, ..., 4 = Friday
     
     //Zobrazení pouze eventů ve dnech po-pá
@@ -137,7 +138,7 @@ const Event = ({referenceMonday, event}) => {
                 
             </g> */}
             <g>
-            <EventRectangle X={X_week} Y={Y_week + Y_hour} L1={event.name} L3={event.place} event={event}/> 
+            <EventRectangle X={X_week} Y={Y_week + Y_hour} L1={event.name} L3={event.place} L2={formattedDate} event={event}/> 
             </g>
         </g>
 

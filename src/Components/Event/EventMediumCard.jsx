@@ -7,13 +7,20 @@ import { start } from '@popperjs/core'
 
 export const EventMediumCard = ({event}) => {
     const startDate = new Date(event?.startdate);
-    const startstring = `${startDate.toDateString()} ${startDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
+    const formattedStartDate = startDate.toLocaleDateString('cs-CZ', { day: 'numeric', month: 'numeric', year: 'numeric' });
+    const formattedStartTime = startDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    const formattedStartstring = `${formattedStartDate} ${formattedStartTime}`;
 
     const endDate = new Date(event?.enddate);
-    const endstring = `${endDate.toDateString()} ${endDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
-    
-    const laststring = new Date(event?.lastchange).toDateString()
-    const createstring = new Date(event?.created).toDateString()
+    const formattedEndDate = endDate.toLocaleDateString('cs-CZ', { day: 'numeric', month: 'numeric', year: 'numeric' });
+    const formattedEndTime = endDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    const formattedEndstring = `${formattedEndDate} ${formattedEndTime}`;
+
+    const lastChangeDate = new Date(event?.lastchange);
+    const formattedLastChangeDate = lastChangeDate.toLocaleDateString('cs-CZ', { day: 'numeric', month: 'numeric', year: 'numeric' });
+
+    const createDate = new Date(event?.created);
+    const formattedCreateDate = createDate.toLocaleDateString('cs-CZ', { day: 'numeric', month: 'numeric', year: 'numeric' });
     return (
         <CardCapsule  title={<>Základní informace <EventLink event={event } /></>}>
             {
@@ -45,20 +52,20 @@ export const EventMediumCard = ({event}) => {
             <br></br>
             <Row>
                 <Col>Počátek</Col>
-                <Col>{startstring}</Col>
+                <Col>{formattedStartstring}</Col>
             </Row>
             <Row>
                 <Col>Konec</Col>
-                <Col>{endstring}</Col>
+                <Col>{formattedEndstring}</Col>
             </Row>
             <br></br>
             <Row>
                 <Col>Vytvořen</Col>
-                <Col>{createstring}</Col>
+                <Col>{formattedCreateDate}</Col>
             </Row>
             <Row>
                 <Col>Poslední změna</Col>
-                <Col>{laststring}</Col>
+                <Col>{formattedLastChangeDate}</Col>
             </Row>
             
             
