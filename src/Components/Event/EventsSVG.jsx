@@ -36,28 +36,16 @@ const EventRectangle = ({X, Y, L1, L2, L3,event, width=defaultwidth, height=defa
 const EventDayHeader = ({day, Y}) => {
     return (
         <g>
-            <EventRectangle X={-300} Y={Y} L2={day} height="575"/>
+            <EventRectangle X={-300} Y={Y+defaultheight_half} L2={day} height="575"/>
             {/* <EventRectangle X={-defaultwidth * 2} Y={Y} L4={day} height={defaultheight * 4}/> */}
-            <EventRectangle X={-defaultwidth} Y={Y + 0} L2={"1-2"} />
-            <EventRectangle X={-defaultwidth} Y={Y + defaultheight} L2={"3-4"} />
-            <EventRectangle X={-defaultwidth} Y={Y + defaultheight * 2} L2={"5-6"} />
-            <EventRectangle X={-defaultwidth} Y={Y + defaultheight * 3} L2={"7-8"} />
+            <EventRectangle X={-defaultwidth} Y={Y + 0+defaultheight_half} L2={"1-2"} />
+            <EventRectangle X={-defaultwidth} Y={Y + defaultheight+defaultheight_half} L2={"3-4"} />
+            <EventRectangle X={-defaultwidth} Y={Y + defaultheight * 2+defaultheight_half} L2={"5-6"} />
+            <EventRectangle X={-defaultwidth} Y={Y + defaultheight * 3+defaultheight_half} L2={"7-8"} />
         </g>
         // <EventRectangle X={-100} Y={Y} L2={day} />
     )
 }
-
-const WeekHeader = ({week, X}) => {
-    return (
-        <g>
-            <rect width={defaultwidth} height={defaultheight_half} x={X} y={-defaultheight_half} rx="2" ry="2" fill={"#7f7f7f7f"} stroke="black" />
-            <text x={X} y={-defaultheight_half} fontSize="2em" fontFamily="serif">
-                <tspan dy={28} x={X+10}>{week}</tspan>
-            </text>
-        </g>
-    )
-}
-
 //Dny Po-Pá
 const days = [
     "Po", "Út", "St", "Čt", "Pá"
@@ -69,14 +57,72 @@ const days = [
 ] */
 const weeks = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]
 /* const weeks = Array.from({length: 52}, (_, i) => i + 1); */ // weeks from 1 to 52
-
-const EventWeekHeader = () => {
+const WeekHeader = ({week, X}) => {
     return (
         <g>
-            {days.map( (v, i) => <EventDayHeader key={v} X={0} Y={defaultheight * 4 * i} day={v}/>)}
-            {weeks.map( (w, i) => <WeekHeader key={w} X={defaultwidth * i} week={w} />)}
+            <rect width={defaultwidth} height={defaultheight_half} x={X} y={-defaultheight_half} rx="2" ry="2" fill={"#7f7f7f7f"} stroke="black" />
+            <text x={X} y={-defaultheight_half} fontSize="2em" fontFamily="serif">
+                <tspan dy={28} x={X+10}>{week}</tspan>
+            </text>
         </g>
     )
+}
+
+const DateHeader = ({ week, X, prevMonday }) => {
+    console.log("Pondělí",prevMonday);
+    return (
+        <g>
+            {days.map((day, i) => {
+                const currentDay = prevMonday;
+                console.log("CurrentDay",currentDay);
+                currentDay.setDate(prevMonday.getDate() + i);
+                console.log("Dny",currentDay);
+                const formattedDate = currentDay.toLocaleDateString('cs-CZ', { day: 'numeric', month: 'numeric', year: 'numeric' });
+                return (
+                    <g key={`${week}-${i}`}>
+                        <rect 
+                            width={defaultwidth} 
+                            height={defaultheight_half} 
+                            x={X} 
+                            y={(defaultheight * 4 * i) + (defaultheight_half * i)} 
+                            rx="2" 
+                            ry="2" 
+                            fill={"#7f7f7f7f"} 
+                            stroke="black" 
+                        />
+                        <text 
+                            x={X} 
+                            y={(defaultheight * 4 * i) + (defaultheight_half * i)} 
+                            fontSize="2em" 
+                            fontFamily="serif"
+                        >
+                            <tspan dy={28} x={X + 10}>{formattedDate}</tspan>
+                        </text>
+                    </g>
+                );
+            })}
+        </g>
+    );
+};
+
+
+
+
+const EventWeekHeader = (prevMonday) => {
+    const verticalSpacing = defaultheight * 4 + defaultheight_half;
+    return (
+        <g>
+            {days.map((v, i) => 
+                <EventDayHeader key={v} X={0} Y={verticalSpacing * i} day={v} />
+            )}
+            {weeks.map((w, i) => 
+                <WeekHeader key={w} X={defaultwidth * i} week={w} />
+            )}
+            {weeks.map((w, i) => (
+                <DateHeader key={w} weeks={weeks} X={defaultwidth * i} prevMonday={prevMonday} />
+            ))}
+        </g>
+    );
 }
 
 
@@ -129,6 +175,8 @@ const Event = ({referenceMonday, event}) => {
     const startMinutes = date.getMinutes(); // returns the minutes (0-59)
     const Y_hour = getYHour(startHour, startMinutes);
     const time = `${startHour}:${startMinutes < 10 ? '0' : ''}${startMinutes}`;
+    //Počítaní Y souřadnice pro event na základě dne v týdnu a času začátku eventu
+    const adjustedY = Y_week + Y_hour + defaultheight_half * dayOfWeek + defaultheight_half;
     return (
         <g>
            {/*  <clipPath id="myClip">
@@ -138,7 +186,7 @@ const Event = ({referenceMonday, event}) => {
                 
             </g> */}
             <g>
-            <EventRectangle X={X_week} Y={Y_week + Y_hour} L1={event.name} L3={event.place} L2={formattedDate} event={event}/> 
+            <EventRectangle X={X_week} Y={adjustedY} L1={event.name} L3={event.place} L2={formattedDate} event={event}/> 
             </g>
         </g>
 
@@ -171,10 +219,10 @@ export const EventsSVG = ({events}) => {
     return (
         <div>
             {/* <input type="range" min="0" max={weeks.length - 16} value={scroll} onChange={handleScroll} /> */}
-            <svg viewBox={"400 -150 1400 3200"} width="90vmin" height="100vmin" xmlns="http://www.w3.org/2000/svg" > {/* Přidat pokud chceme scroll pomocí kolečka myši/touchpadu : onWheel={handleWheel} */}
+            <svg viewBox={"400 -150 1400 3600"} width="90vmin" height="100vmin" xmlns="http://www.w3.org/2000/svg" > {/* Přidat pokud chceme scroll pomocí kolečka myši/touchpadu : onWheel={handleWheel} */}
                 <g >
                 {/* <g transform={`translate(${-scrollX * defaultwidth}, ${-scrollY * defaultwidth})`}> */}  {/* Přidat pokud chceme scroll pomocí kolečka myši/touchpadu */}
-                    <EventWeekHeader />
+                    <EventWeekHeader prevMonday={prevMonday}/>
                     {events.map((e) => (
                         <Event key={e.id} referenceMonday={prevMonday} event={e} />
                     ))}
