@@ -67,17 +67,19 @@ const WeekHeader = ({week, X}) => {
         </g>
     )
 }
-
+//CHYBA NEKDE TADY LOL
 const DateHeader = ({ week, X, prevMonday }) => {
-    console.log("Pondělí",prevMonday);
+    const startOfWeek = new Date(prevMonday);
+    startOfWeek.setDate(prevMonday.getDate() + (week - 1) * 7); // Calculate the start date for the given week
+
     return (
         <g>
             {days.map((day, i) => {
-                const currentDay = prevMonday;
-                console.log("CurrentDay",currentDay);
-                currentDay.setDate(prevMonday.getDate() + i);
-                console.log("Dny",currentDay);
-                const formattedDate = currentDay.toLocaleDateString('cs-CZ', { day: 'numeric', month: 'numeric', year: 'numeric' });
+                const currentDay = new Date(startOfWeek);
+                currentDay.setDate(startOfWeek.getDate() + i);
+
+                const formattedDate = currentDay.toLocaleDateString('cs-CZ', { day: 'numeric', month: 'numeric' });
+
                 return (
                     <g key={`${week}-${i}`}>
                         <rect 
@@ -108,7 +110,9 @@ const DateHeader = ({ week, X, prevMonday }) => {
 
 
 
-const EventWeekHeader = (prevMonday) => {
+
+
+const EventWeekHeader = ({prevMonday}) => {
     const verticalSpacing = defaultheight * 4 + defaultheight_half;
     return (
         <g>
@@ -119,7 +123,7 @@ const EventWeekHeader = (prevMonday) => {
                 <WeekHeader key={w} X={defaultwidth * i} week={w} />
             )}
             {weeks.map((w, i) => (
-                <DateHeader key={w} weeks={weeks} X={defaultwidth * i} prevMonday={prevMonday} />
+                <DateHeader key={w} week={w} X={defaultwidth * i} prevMonday={prevMonday} />
             ))}
         </g>
     );
@@ -157,7 +161,6 @@ const Event = ({referenceMonday, event}) => {
     const weekNumber = getWeekNumber(event.startdate);
     const refWeekNumber = getWeekNumber(referenceMonday);
     const date = new Date(event.startdate);
-    const formattedDate = date.toLocaleDateString('cs-CZ', { day: 'numeric', month: 'numeric', year: 'numeric' });
     const dayOfWeek = (date.getDay() + 6) % 7; // 0 = Monday, 1 = Tuesday, ..., 4 = Friday
     
     //Zobrazení pouze eventů ve dnech po-pá
@@ -186,7 +189,7 @@ const Event = ({referenceMonday, event}) => {
                 
             </g> */}
             <g>
-            <EventRectangle X={X_week} Y={adjustedY} L1={event.name} L3={event.place} L2={formattedDate} event={event}/> 
+            <EventRectangle X={X_week} Y={adjustedY} L1={event.name} L3={event.place} event={event}/> 
             </g>
         </g>
 
@@ -196,7 +199,7 @@ const Event = ({referenceMonday, event}) => {
 export const EventsSVG = ({events}) => {
     const now = new Date()
     /* const prevMonday = new Date(now.getFullYear(), now.getMonth(), (now.getDate()-now.getDay() + 1)) */
-    const prevMonday = new Date('2023-03-01T00:00:00');
+    const prevMonday = new Date('2024-03-04T00:00:00'); //Přednastavení na 4.3.2024, což je první pondělí v březnu
 
     /* const handleScroll = (event) => {
         setScroll(parseInt(event.target.value, 10));
