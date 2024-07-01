@@ -8,6 +8,7 @@ import { FetchSearchFacilityAsyncAction } from '../../Queries/FetchSearchFacilit
 import { FetchFacilityAsyncAction } from '../../Queries/FetchFacilityAsyncAction';
 import { FetchFacilityByIdAsyncAction } from '../../Queries/FetchFacilityByIdAsyncAction';
 import { FetchEventByIdAsyncAction } from '../../Queries/FetchEventByIdAsyncAction';
+/* import {FacilityLink} from '@jokachu/uoisfrontend-facilities/src' */
 
 const id = "7132701c-574a-41fe-9d52-17d68d20dab1";
 
@@ -24,6 +25,7 @@ export const EventEditPlace = ({ event }) => {
     };
 
         return (
+            
             <CardCapsule title={<>Místo: <ProxyLink to={`/facilities/facility/view/${event.placeId}`}>{event.place}</ProxyLink></>}>
                 <Row>
                     <Col>

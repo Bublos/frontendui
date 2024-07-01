@@ -46,3 +46,7 @@ Based on React, developed with vite stack.
 31.5 - změna SubEventsEdit a view card
 
 7.6 - Uprava různých verzí menu a dalšćih chyb, na které jse mbyl upozorněn v mailu
+
+28.6 - Vyřešení správnehó zobrazovaní data pro jednotlivé dny
+
+1.7 - Řešení linků na jednotlivá místa

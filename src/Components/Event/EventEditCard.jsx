@@ -12,7 +12,7 @@ const validator = CreateAsyncQueryValidator({error: "Nepovedlo se přidat skupin
 export const EventEditCard = ({event}) => {
 
     return (
-        <CardCapsule  title={<>Událost <EventLink event={event } /></>}>
+        <CardCapsule  title={<>Základní atributy <EventLink event={event } /></>}>
             <Row>
                 <Col>
                     <EditableAttributeText item={event} attributeName ="name" label="Název" asyncUpdater={UpdateEventAsyncAction}/>

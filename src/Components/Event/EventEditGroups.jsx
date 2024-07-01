@@ -11,6 +11,7 @@ import { FetchSearchGroupAsyncAction } from '../../Queries/FetchSearchGroupAsync
 import {  EventGroupInsertAsyncAction } from '../../Queries/EventGroupInsertAsyncAction'
 import { FetchEventByIdAsyncAction } from '../../Queries/FetchEventByIdAsyncAction'
 import { EventGroupDeleteAsyncAction } from '../../Queries/EventGroupDeleteAsyncAction'
+import { GroupLink } from '@hrbolek/uoisfrontend-users/src'
 /* import { FetchSearchGroupAsyncAction } from '../../Queries/FetchSearchGroupAsyncAction'
 import { EventEditGroup } from './EventEditGroup' */
 
@@ -75,7 +76,7 @@ const GroupRow = ({group, event}) => {
     }
     return (
         <tr>
-            <td>{group.name}</td>
+            <td><GroupLink group={group} /></td>
             <td><DeleteButton onClick={onClick}>D</DeleteButton></td>
         </tr>
     )
