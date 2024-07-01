@@ -49,4 +49,4 @@ Based on React, developed with vite stack.
 
 28.6 - Vyřešení správnehó zobrazovaní data pro jednotlivé dny
 
-1.7 - Řešení linků na jednotlivá místa
+1.7 - Řešení linků na jednotlivá místa, Importnuté linky od Tondy na Facility, snaha zprovoznit se group link (raw plugin) - neúspěšně :C

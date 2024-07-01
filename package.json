@@ -1,7 +1,7 @@
 {
   "name": "@stepand1/uoisfrontend-event",
   "private": false,
-  "version": "0.4.24",
+  "version": "0.4.25",
   "type": "module",
   "main": "dist/umd/index.js",
   "module": "dist/es/index.js",
@@ -41,6 +41,7 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.5",
     "vite": "^5.0.8",
-    "vitest": "^1.1.1"
+    "vitest": "^1.1.1",
+    "vite-raw-plugin": "1.0.2"
   }
 }

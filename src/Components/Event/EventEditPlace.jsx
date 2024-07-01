@@ -8,7 +8,7 @@ import { FetchSearchFacilityAsyncAction } from '../../Queries/FetchSearchFacilit
 import { FetchFacilityAsyncAction } from '../../Queries/FetchFacilityAsyncAction';
 import { FetchFacilityByIdAsyncAction } from '../../Queries/FetchFacilityByIdAsyncAction';
 import { FetchEventByIdAsyncAction } from '../../Queries/FetchEventByIdAsyncAction';
-/* import {FacilityLink} from '@jokachu/uoisfrontend-facilities/src' */
+import {FacilityLink} from '@jokachu/uoisfrontend-facilities/src'
 
 const id = "7132701c-574a-41fe-9d52-17d68d20dab1";
 
@@ -24,16 +24,17 @@ export const EventEditPlace = ({ event }) => {
         await dispatch(FetchEventByIdAsyncAction({id: event.id}));
     };
 
+        const facility = { id: event.placeId, name: event.place };
         return (
             
-            <CardCapsule title={<>Místo: <ProxyLink to={`/facilities/facility/view/${event.placeId}`}>{event.place}</ProxyLink></>}>
+            <CardCapsule title={<><FacilityLink facility={facility} menu={true} /></>}>
                 <Row>
                     <Col>
                     <SearchInput
-                label="Výběr Místa"
-                FetchByPatternAsyncAction={FetchSearchFacilityAsyncAction}
-                onSelect={handleUpdate}
-            />
+                        label="Výběr Místa"
+                        FetchByPatternAsyncAction={FetchSearchFacilityAsyncAction}
+                        onSelect={handleUpdate}
+                    />
                     </Col>
                 </Row>
                 

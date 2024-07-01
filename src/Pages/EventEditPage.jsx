@@ -24,7 +24,7 @@ export const EventEditPage = ()  => {
             //</div>
             <EventLargeCard event={event}>
                 <EventEditCard event = {event} />
-                <EventEditGroups event = {event} />
+                <EventEditGroups groups = {event.groups} />
                 <EventEditPlace event = {event} />
             </EventLargeCard>
         )

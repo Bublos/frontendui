@@ -4,6 +4,8 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import { EventLink } from './EventLink'
 import { start } from '@popperjs/core'
+import {FacilityLink} from '@jokachu/uoisfrontend-facilities/src'
+
 
 export const EventMediumCard = ({event}) => {
     const startDate = new Date(event?.startdate);
@@ -21,6 +23,8 @@ export const EventMediumCard = ({event}) => {
 
     const createDate = new Date(event?.created);
     const formattedCreateDate = createDate.toLocaleDateString('cs-CZ', { day: 'numeric', month: 'numeric', year: 'numeric' });
+
+    const facility = { id: event.placeId, name: event.place };
     return (
         <CardCapsule  title={<>Základní informace <EventLink event={event } /></>}>
             {
@@ -40,11 +44,13 @@ export const EventMediumCard = ({event}) => {
                 <Col>Typ</Col>
                 <Col>{event?.eventType?.name}</Col>
             </Row>
+            
             {
             event?.place?
+            
                 <Row>
                     <Col>Místo</Col>
-                    <Col><a href={`/facilities/facility/view/${event.placeId}`}>{event.place}</a></Col>
+                    <Col><FacilityLink facility={facility} menu={true} /></Col>
                 </Row>
                 :""
 
